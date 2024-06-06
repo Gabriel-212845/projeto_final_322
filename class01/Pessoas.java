@@ -1,6 +1,23 @@
 package class01;
 
 abstract public class Pessoas {
-    private String nome;
-    private String id;
+    protected String nome;
+    protected String id;
+
+    public String getNome() {
+        return nome;
+    }
+    public String getId() {
+        return id;
+    }
+
+
+
+
+
+
+
+
+
+
 }
