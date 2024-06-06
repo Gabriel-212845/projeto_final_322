@@ -1,5 +1,5 @@
 package class01;
 
-public class Pessoas {
-    
+abstract public class Pessoas {
+    private String nome;
 }
