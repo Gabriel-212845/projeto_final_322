@@ -1,5 +1,5 @@
 package class01;
 
-public class Caixa {
+public class Caixa extends Pessoas{
     
 }
