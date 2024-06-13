@@ -34,7 +34,7 @@ public class PedidoDeEstoque {
         this.quantidade = quantidade;
         this.data = LocalDate.now();
         double aux = 0;
-        for(int i=0; i<=produtos.size(); i++){
+        for(int i=0; i<produtos.size(); i++){
             aux += produtos.get(i).getPrecoCusto() * quantidade.get(i);
         }
         this.valorTotal = aux;

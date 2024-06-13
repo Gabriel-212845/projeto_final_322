@@ -70,7 +70,7 @@ public class Caixa extends Pessoas implements Estocar{
 
     public List<Compra> pedidosAguardandoEnvio(){
         List<Compra> pedidosAguardandoEnvio = new ArrayList<>();
-        for(int i = 0; i<=this.clientes.size(); i++){
+        for(int i = 0; i<this.clientes.size(); i++){
             pedidosAguardandoEnvio.addAll(clientes.get(i).getComprasAguardandoPostagem());
         }
         return pedidosAguardandoEnvio;
@@ -78,7 +78,7 @@ public class Caixa extends Pessoas implements Estocar{
 
     public void enviarPedidos(){
         List<Compra> pedidosAguardandoEnvio = new ArrayList<>();
-        for(int i = 0; i<=this.clientes.size(); i++){
+        for(int i = 0; i<this.clientes.size(); i++){
             pedidosAguardandoEnvio.addAll(clientes.get(i).getComprasAguardandoPostagem());
             clientes.get(i).getComprasEmTransito().addAll(clientes.get(i).getComprasAguardandoPostagem());
             clientes.get(i).getComprasAguardandoPostagem().clear();
@@ -88,9 +88,9 @@ public class Caixa extends Pessoas implements Estocar{
 
 
     private void despachar(List<Compra> compras){
-        for(int i = 0; i<=compras.size(); i++){
-            for(int j=0; j<=compras.get(i).getProdutos().size(); j++){
-                for(int k=0; k<=compras.get(i).getQuantidade().get(j); k++){
+        for(int i = 0; i<compras.size(); i++){
+            for(int j=0; j<compras.get(i).getProdutos().size(); j++){
+                for(int k=0; k<compras.get(i).getQuantidade().get(j); k++){
                     estoque.removerDoEstoque(compras.get(i).getProdutos().get(j));
                 }
             }
@@ -106,9 +106,9 @@ public class Caixa extends Pessoas implements Estocar{
 
     public void reporEstoque(){
         //comprar produtos para o estoque
-        for(int k = 0; k<=this.pedidosDeEstoque.size(); k++){
+        for(int k = 0; k<this.pedidosDeEstoque.size(); k++){
             PedidoDeEstoque pedidoDeEstoque = this.pedidosDeEstoque.get(k);
-            for(int i=0; i<=pedidoDeEstoque.getProdutos().size(); i++){
+            for(int i=0; i<pedidoDeEstoque.getProdutos().size(); i++){
                 for(int j=0; j<pedidoDeEstoque.getQuantidade().get(i); j++){
                     estoque.adicionarAoEstoque(pedidoDeEstoque.getProdutos().get(i));
                 }

@@ -15,7 +15,7 @@ public class Estoque {
     }
 
     public boolean adicionarAoEstoque(Produtos produto) {
-        for(int i = 0; i <= this.produtosNoEstoque.size(); i++){
+        for(int i = 0; i < this.produtosNoEstoque.size(); i++){
             if(produto.equals(this.produtosNoEstoque.get(i))){
                 this.quantDoProduto.set(i, this.quantDoProduto.get(i) + 1);
                 return true;
@@ -28,7 +28,7 @@ public class Estoque {
     }
 
     public boolean removerDoEstoque(Produtos produto){
-        for(int i = 0; i <= this.produtosNoEstoque.size(); i++){
+        for(int i = 0; i < this.produtosNoEstoque.size(); i++){
             if(produto.equals(this.produtosNoEstoque.get(i))){
                 if(this.quantDoProduto.get(i) == 0){
                     this.quantDoProduto.remove(i);
@@ -45,7 +45,7 @@ public class Estoque {
     @Override
     public String toString() {
         String aux = "ESTOQUE: \n";
-        for(int i = 0; i <= this.produtosNoEstoque.size(); i++){
+        for(int i = 0; i < this.produtosNoEstoque.size(); i++){
             aux += this.produtosNoEstoque.get(i).getNome() + "   quantidade: " + this.quantDoProduto.get(i) + "\n";
         }
         return aux;

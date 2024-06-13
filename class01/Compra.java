@@ -41,7 +41,7 @@ public class Compra {
 
 
     public boolean adicionarACompra(Produtos produto) {
-        for(int i = 0; i <= this.produtos.size(); i++){
+        for(int i = 0; i < this.produtos.size(); i++){
             if(produto.equals(this.produtos.get(i))){
                 this.quantidade.set(i, this.quantidade.get(i) + 1);
                 return true;
@@ -54,7 +54,7 @@ public class Compra {
     }
 
     public boolean removerDaCompra(Produtos produto){
-        for(int i = 0; i <= this.produtos.size(); i++){
+        for(int i = 0; i < this.produtos.size(); i++){
             if(produto.equals(this.produtos.get(i))){
                 if(this.quantidade.get(i) == 0){
                     this.quantidade.remove(i);
@@ -92,7 +92,7 @@ public class Compra {
         this.quantidade = quantidade;
         this.desconto = desconto;
         double aux = 0;
-        for(int i=0; i<=produtos.size(); i++){
+        for(int i=0; i<produtos.size(); i++){
             aux = produtos.get(i).getPrecoVenda() * quantidade.get(i);
         }
         this.valorPago = aux - aux * desconto;

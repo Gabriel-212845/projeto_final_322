@@ -49,7 +49,7 @@ public class Gerente extends Pessoas implements Gerir{
     }
 
     public void analisarPedidosDeAumento(){
-        for(int i = 0; i<=this.caixasContratados.size(); i++){
+        for(int i = 0; i<this.caixasContratados.size(); i++){
             if(this.caixasContratados.get(i).getPedidoDeAumento() != null){
                 LocalDate data = this.caixasContratados.get(i).getPedidoDeAumento().getData();
                 data.minusYears(1);
@@ -85,8 +85,8 @@ public class Gerente extends Pessoas implements Gerir{
     public double calcularDespesaDeProduto(LocalDate data){
         LocalDate mesPassado = data.minusMonths(1);
         double valor = 0;
-        for(int i=0; i<=caixasContratados.size(); i++){
-            for(int j=0; j<=caixasContratados.get(i).getHistoricoDePedidos().size(); j++){
+        for(int i=0; i<caixasContratados.size(); i++){
+            for(int j=0; j<caixasContratados.get(i).getHistoricoDePedidos().size(); j++){
                 if(caixasContratados.get(i).getHistoricoDePedidos().get(j).getData().isAfter(mesPassado)){
                     valor += caixasContratados.get(i).getHistoricoDePedidos().get(j).getValorTotal();
                 }
@@ -98,9 +98,9 @@ public class Gerente extends Pessoas implements Gerir{
     public double calcularRendimentoDoMes(LocalDate data){
         LocalDate mesPassado = data.minusMonths(1);
         double rendimento = 0;
-        for(int i=0; i<=caixasContratados.size(); i++){
-            for(int j=0; j<=caixasContratados.get(i).getClientes().size(); j++){
-                for(int k=0; k<=caixasContratados.get(i).getClientes().get(j).getHistoricoDeCompras().size(); k++){
+        for(int i=0; i<caixasContratados.size(); i++){
+            for(int j=0; j<caixasContratados.get(i).getClientes().size(); j++){
+                for(int k=0; k<caixasContratados.get(i).getClientes().get(j).getHistoricoDeCompras().size(); k++){
 
                     List<Compra> comprasFeitas = caixasContratados.get(i).getClientes().get(j).getHistoricoDeCompras();
                     if(comprasFeitas.get(k).getDataDoPagamento().isAfter(mesPassado)){
@@ -122,7 +122,7 @@ public class Gerente extends Pessoas implements Gerir{
 
     public boolean solicitarCompra(List<Produtos> produtos, List<Integer> quant, Caixa caixa){
         PedidoDeEstoque pedido = new PedidoDeEstoque(this, produtos, quant);
-        for(int i=0; i<=this.caixasContratados.size();i++){
+        for(int i=0; i<this.caixasContratados.size();i++){
             if(caixasContratados.get(i).equals(caixa)){
                 caixasContratados.get(i).adicionarPedidoDeEstoque(pedido);
                 return true;
