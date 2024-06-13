@@ -1,0 +1,23 @@
+/* styles.css */
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+.label {
+    -fx-font-size: 14px;
+}
+
+.text-field, .password-field, .combo-box {
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+}
+
+.button {
+    -fx-background-color: #0073e6;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #005bb5;
+}
