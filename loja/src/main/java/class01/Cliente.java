@@ -21,9 +21,10 @@ public class Cliente extends Pessoas{
 
 
 
-    Cliente(String nome, String id, double descontoEspecial) {
-        super(nome, id);
+    public Cliente(String nome, String id, double descontoEspecial, double saldo) {
+        super(nome, id, saldo);
         this.descontoEspecial = descontoEspecial;
+        this.saldo = saldo;
     }
 
 }
