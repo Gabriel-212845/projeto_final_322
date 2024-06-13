@@ -1,7 +1,12 @@
 package projeto;
 
+import java.io.IOException;
+
+import class01.Gerente;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -13,6 +18,7 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
+    @SuppressWarnings("exports")
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Login - Loja de Eletrônicos");
@@ -84,6 +90,20 @@ public class App extends Application {
                 case "@cliente.com":
                     if (selectedModule.equals("Compras")) {
                         errorMessage.setText("Acesso permitido ao módulo: Compras");
+
+                        /////////////////////////
+                        Parent root1;
+                        try {
+                            root1 = FXMLLoader.load(getClass().getResource("primary.fxml"));
+                            Scene scene1 = new Scene(root1);
+                            Stage stage1 = new Stage();
+	                        stage1.setScene(scene1);
+	                        stage1.show();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+	                    /////////////////////////
+                        
                         primaryStage.close();
                     } else {
                         errorMessage.setText("Login inválido");
@@ -103,6 +123,22 @@ public class App extends Application {
         primaryStage.setMinHeight(225);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         primaryStage.show();
+    }
+
+
+    private void SceneGerenciamento(Gerente genrente, Stage stage){
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("Gerenciamento.fxml"));
+            Scene scene = new Scene(root);
+	        stage.setScene(scene);
+	        stage.show();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+
+
     }
 
     public static void main(String[] args) {
