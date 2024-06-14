@@ -130,8 +130,8 @@ public class Caixa extends Pessoas implements Estocar{
 
 
 
-    Caixa(String nome, String id, double salario){
-        super(nome, id);
+    public Caixa(String nome, String id, double saldo, double salario){
+        super(nome, id, saldo);
         this.salario = salario;
         this.descontoEspecial = 0.1;
         this.faltasSemJust = 0;

@@ -7,14 +7,16 @@ public abstract class Produtos {
     protected String marca;
     protected String fornecedor;
     protected boolean promocao;
+    protected String path;
 
-    public Produtos(double precoCusto, double precoVenda, String nome, String marca, String fornecedor, boolean promocao) {
+    public Produtos(double precoCusto, double precoVenda, String nome, String marca, String fornecedor, boolean promocao, String path) {
         this.precoCusto = precoCusto;
         this.precoVenda = precoVenda;
         this.nome = nome;
         this.marca = marca;
         this.fornecedor = fornecedor;
         this.promocao = promocao;
+        this.path = path;
     }
 
     public double getPrecoCusto() {

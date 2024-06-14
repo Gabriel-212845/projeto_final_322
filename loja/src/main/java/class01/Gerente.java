@@ -136,8 +136,8 @@ public class Gerente extends Pessoas implements Gerir{
 
 
 
-    Gerente(String nome, String id, double lucro) {
-        super(nome, id);
+    Gerente(String nome, String id, double saldo, double lucro) {
+        super(nome, id, saldo);
         this.lucro = lucro;
         this.descontoEspecial = 0.1;
         this.caixasContratados = new ArrayList<>();

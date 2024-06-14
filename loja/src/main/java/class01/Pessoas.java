@@ -8,6 +8,7 @@ abstract public class Pessoas {
     protected String nome;
     protected String id;
     protected double descontoEspecial;
+    protected double saldo;
     protected Compra carrinho;
     protected List<Compra> comprasAguardandoPostagem;
     protected List<Compra> comprasEmTransito;
@@ -79,9 +80,10 @@ abstract public class Pessoas {
 
 
 
-    Pessoas(String nome, String id){
+    public Pessoas(String nome, String id, double saldo){
         this.nome = nome;
         this.id = id;
+        this.saldo = saldo;
         this.carrinho = null;
         this.comprasAguardandoPostagem = new ArrayList<>();
         this.comprasEmTransito = new ArrayList<>();
