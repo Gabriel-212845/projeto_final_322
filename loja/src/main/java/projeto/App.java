@@ -73,10 +73,20 @@ public class App extends Application {
                 return;
             }
 
+            Parent root1;
+
             String domain = email.substring(atIndex);
             switch (domain) {
                 case "@gestor.com":
                     errorMessage.setText("Acesso permitido ao módulo: " + selectedModule);
+
+                    /////////////////////////
+                    Gerente gerente = new Gerente("Arnaldo", "123456", 0.1);
+                    Stage stage2 = new Stage();
+                    SceneGerenciamento(gerente, stage2);
+                    /////////////////////////
+
+
                     primaryStage.close();
                     break;
                 case "@funcionario.com":
@@ -92,7 +102,6 @@ public class App extends Application {
                         errorMessage.setText("Acesso permitido ao módulo: Compras");
 
                         /////////////////////////
-                        Parent root1;
                         try {
                             root1 = FXMLLoader.load(getClass().getResource("primary.fxml"));
                             Scene scene1 = new Scene(root1);
@@ -126,7 +135,7 @@ public class App extends Application {
     }
 
 
-    private void SceneGerenciamento(Gerente genrente, Stage stage){
+    private void SceneGerenciamento(Gerente gerente, Stage stage){
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("Gerenciamento.fxml"));
@@ -136,8 +145,6 @@ public class App extends Application {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-
-
 
     }
 
