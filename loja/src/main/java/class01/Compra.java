@@ -87,7 +87,7 @@ public class Compra {
 
 
 
-    Compra(List<Produtos> produtos, List<Integer> quantidade, double desconto){
+    public Compra(List<Produtos> produtos, List<Integer> quantidade, double desconto){
         this.produtos = produtos;
         this.quantidade = quantidade;
         this.desconto = desconto;

@@ -8,9 +8,9 @@ public class Tv extends Produtos {
     private boolean suport;
     private double consumoEnergia;
 
-    public Tv(double precoCusto, double precoVenda, String nome, String marca, String fornecedor, boolean promocao,
+    public Tv(double precoCusto, double precoVenda, String nome, String marca, String fornecedor, boolean promocao, String path,
               double tamanhoTela, String resolucaoTela, String tipoTela, boolean smart, boolean suport, double consumoEnergia) {
-        super(precoCusto, precoVenda, nome, marca, fornecedor, promocao);
+        super(precoCusto, precoVenda, nome, marca, fornecedor, promocao, path);
         this.tamanhoTela = tamanhoTela;
         this.resolucaoTela = resolucaoTela;
         this.tipoTela = tipoTela;

@@ -81,7 +81,7 @@ public class App extends Application {
                     errorMessage.setText("Acesso permitido ao módulo: " + selectedModule);
 
                     /////////////////////////
-                    Gerente gerente = new Gerente("Arnaldo", "123456", 0.1);
+                    Gerente gerente = new Gerente("Arnaldo", "123456", 550, 0.1);
                     Stage stage2 = new Stage();
                     SceneGerenciamento(gerente, stage2);
                     /////////////////////////

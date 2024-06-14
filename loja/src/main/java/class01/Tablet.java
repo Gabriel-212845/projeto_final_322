@@ -8,9 +8,9 @@ public class Tablet extends Produtos {
     private boolean caneta;
     private boolean teclado;
 
-    public Tablet(double precoCusto, double precoVenda, String nome, String marca, String fornecedor, boolean promocao,
+    public Tablet(double precoCusto, double precoVenda, String nome, String marca, String fornecedor, boolean promocao, String path,
                   double tamanhoTela, int armazenamento, int resolucaoCamera, int capacidadeBateria, boolean caneta, boolean teclado) {
-        super(precoCusto, precoVenda, nome, marca, fornecedor, promocao);
+        super(precoCusto, precoVenda, nome, marca, fornecedor, promocao, path);
         this.tamanhoTela = tamanhoTela;
         this.armazenamento = armazenamento;
         this.resolucaoCamera = resolucaoCamera;

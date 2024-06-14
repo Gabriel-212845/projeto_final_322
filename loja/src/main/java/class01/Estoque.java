@@ -55,7 +55,7 @@ public class Estoque {
 
 
 
-    Estoque(List<Produtos> produtosNoEstoque, List<Integer> quantDoProduto){
+    public Estoque(List<Produtos> produtosNoEstoque, List<Integer> quantDoProduto){
         this.produtosNoEstoque = produtosNoEstoque;
         this.quantDoProduto = quantDoProduto;
     }

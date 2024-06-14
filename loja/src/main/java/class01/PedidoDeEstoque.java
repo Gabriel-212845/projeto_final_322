@@ -1,7 +1,7 @@
 package class01;
 
-import java.util.List;
 import java.time.LocalDate;
+import java.util.List;
 
 
 public class PedidoDeEstoque {
@@ -28,7 +28,7 @@ public class PedidoDeEstoque {
     }
 
 
-    PedidoDeEstoque(Gerente gerenteResponsavel, List<Produtos> produtos, List<Integer> quantidade){
+    public PedidoDeEstoque(Gerente gerenteResponsavel, List<Produtos> produtos, List<Integer> quantidade){
         this.gerenteResponsavel = gerenteResponsavel;
         this.produtos = produtos;
         this.quantidade = quantidade;

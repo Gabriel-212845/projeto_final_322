@@ -10,9 +10,9 @@ public class Celular extends Produtos {
     private int capacidadeBateria;
     private List<String> resistencias;
 
-    public Celular(double precoCusto, double precoVenda, String nome, String marca, String fornecedor, boolean promocao,
+    public Celular(double precoCusto, double precoVenda, String nome, String marca, String fornecedor, boolean promocao, String path,
                    double tamanhoTela, int qtdChips, int armazenamento, int resolucaoCamera, int capacidadeBateria, List<String> resistencias) {
-        super(precoCusto, precoVenda, nome, marca, fornecedor, promocao);
+        super(precoCusto, precoVenda, nome, marca, fornecedor, promocao, path);
         this.tamanhoTela = tamanhoTela;
         this.qtdChips = qtdChips;
         this.armazenamento = armazenamento;

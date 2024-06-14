@@ -14,7 +14,7 @@ public class PedidoDeAumento {
     }
 
 
-    PedidoDeAumento(Caixa requerente){
+    public PedidoDeAumento(Caixa requerente){
         this.requerente = requerente;
         this.data = LocalDate.now();
     }
