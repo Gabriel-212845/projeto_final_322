@@ -46,6 +46,9 @@ public class Caixa extends Pessoas implements Estocar{
     public void setSalario(double salario) {
         this.salario = salario;
     }
+    public void setDataDeContratacao(LocalDate dataDeContratacao) {
+        this.dataDeContratacao = dataDeContratacao;
+    }
 
 
 
@@ -62,6 +65,15 @@ public class Caixa extends Pessoas implements Estocar{
 
     public void adicionarAumentoNoHistorico(PedidoDeAumento aumento){
         this.historicoDeAumentos.add(aumento);
+    }
+
+    public String ListarPedidosDeEstoque(){
+        String aux = "[";
+        for(int i=0; i<pedidosDeEstoque.size(); i++){
+            aux += pedidosDeEstoque.get(i).toString() + ", ";
+        }
+        aux += "]\n";
+        return aux;
     }
 
 
@@ -124,8 +136,8 @@ public class Caixa extends Pessoas implements Estocar{
 
     @Override
     public String toString() {
-        return "CAIXA\n"+"Nome: "+nome+"\nId: "+id+"\nData de Contratação: "
-                +dataDeContratacao+"\nSalario: "+salario+"\nFaltas sem Justificativa"+faltasSemJust+"\n";
+        return nome+"\nId: "+id+"\nData de Contratação: "
+                +dataDeContratacao+"\nSalario: "+salario+"\nFaltas sem Justificativa: "+faltasSemJust+"\n";
     }
 
 

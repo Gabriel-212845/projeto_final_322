@@ -18,6 +18,15 @@ public class Tv extends Produtos {
         this.suport = suport;
         this.consumoEnergia = consumoEnergia;
     }
+    public Tv(Tv tv) {
+        super(tv.precoCusto, tv.precoVenda, tv.nome, tv.marca, tv.fornecedor, tv.promocao, tv.path);
+        this.tamanhoTela = tv.tamanhoTela;
+        this.resolucaoTela = tv.resolucaoTela;
+        this.tipoTela = tv.tipoTela;
+        this.smart = tv.smart;
+        this.suport = tv.suport;
+        this.consumoEnergia = tv.consumoEnergia;
+    }
 
     public double getTamanhoTela() {
         return tamanhoTela;
@@ -65,6 +74,20 @@ public class Tv extends Produtos {
 
     public void setConsumoEnergia(double consumoEnergia) {
         this.consumoEnergia = consumoEnergia;
+    }
+
+
+    public String getClasse(){
+        return "Tv";
+    }
+
+    @Override
+    public String toString() {
+        
+        return "TV: " + nome + "\nMarca: " + marca + "\nPreço de Venda: " + precoVenda + "\nPreço de Custo: " + precoCusto +
+                "\nFornecedor: " + fornecedor + "\nEm promoção: " + promocao + "\nTamanho da Tela: " + tamanhoTela +
+                " polegadas\nResolução da Tela: " + resolucaoTela + "Tipo de Tela: " + tipoTela + "\nSmart: " + (smart ? "Sim" : "Não") +
+                "\nSuporte: " + (suport ? "Acompanha Suporte" : "Não Acompanha Suporte") + "\nConsumo de Energia: " + consumoEnergia + " kWh";
     }
 
     @Override

@@ -1,5 +1,8 @@
 package class01;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Produtos {
     protected double precoCusto;
     protected double precoVenda;
@@ -66,6 +69,29 @@ public abstract class Produtos {
     public void setPromocao(boolean promocao) {
         this.promocao = promocao;
     }
+
+    public String getClasse(){
+        return "Produtos";
+    }
+
+    public static List<Produtos> DeepCopyList(List<Produtos> listaProdutos){
+        List<Produtos> copy = new ArrayList<>();
+        for(int i = 0; i< listaProdutos.size(); i++){
+            if(listaProdutos.get(i).getClasse().equals("Tv")){
+                copy.add(new Tv((Tv)listaProdutos.get(i)));
+            } else if(listaProdutos.get(i).getClasse().equals("Celular")){
+                copy.add(new Celular((Celular)listaProdutos.get(i)));
+            } else if(listaProdutos.get(i).getClasse().equals("Tablet")){
+                copy.add(new Tablet((Tablet)listaProdutos.get(i)));
+            }
+        }
+        return copy;
+    }
+
+
+
+
+
 
     public abstract void mostrarDetalhes();
 }

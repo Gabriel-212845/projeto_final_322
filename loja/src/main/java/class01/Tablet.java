@@ -18,6 +18,15 @@ public class Tablet extends Produtos {
         this.caneta = caneta;
         this.teclado = teclado;
     }
+    public Tablet(Tablet tablet) {
+        super(tablet.precoCusto, tablet.precoVenda, tablet.nome, tablet.marca, tablet.fornecedor, tablet.promocao, tablet.path);
+        this.tamanhoTela = tablet.tamanhoTela;
+        this.armazenamento = tablet.armazenamento;
+        this.resolucaoCamera = tablet.resolucaoCamera;
+        this.capacidadeBateria = tablet.capacidadeBateria;
+        this.caneta = tablet.caneta;
+        this.teclado = tablet.teclado;
+    }
 
     public double getTamanhoTela() {
         return tamanhoTela;
@@ -65,6 +74,22 @@ public class Tablet extends Produtos {
 
     public void setTeclado(boolean teclado) {
         this.teclado = teclado;
+    }
+
+    public String getClasse(){
+        return "Tablet";
+    }
+
+
+
+
+    @Override
+    public String toString() {
+        return "Tablet: " + nome + "\nMarca: " + marca + "\nPreço de Venda: " + precoVenda + "\nPreço de Custo: " + precoCusto +
+               "\nFornecedor: " + fornecedor + "\nEm promoção: " + promocao + "\nTamanho da Tela: " + tamanhoTela + "\nArmazenamento: " +
+               armazenamento + "GB" + "\nResolução da Câmera: " + resolucaoCamera + "MP\nCapacidade da Bateria: " + capacidadeBateria +
+               "mAh" + "\nCaneta: " + (caneta ? "Sim" : "Não") + "\nTeclado: " + (teclado ? "Sim" : "Não");
+
     }
 
     @Override

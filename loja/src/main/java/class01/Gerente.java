@@ -34,6 +34,7 @@ public class Gerente extends Pessoas implements Gerir{
     }
 
     public void contratarCaixa(Caixa caixa){
+        caixa.setDataDeContratacao(LocalDate.now());
         caixasContratados.add(caixa);
     }
 
@@ -122,11 +123,17 @@ public class Gerente extends Pessoas implements Gerir{
 
     public boolean solicitarCompra(List<Produtos> produtos, List<Integer> quant, Caixa caixa){
         PedidoDeEstoque pedido = new PedidoDeEstoque(this, produtos, quant);
-        for(int i=0; i<this.caixasContratados.size();i++){
-            if(caixasContratados.get(i).equals(caixa)){
-                caixasContratados.get(i).adicionarPedidoDeEstoque(pedido);
-                return true;
+
+        int aux = -1;
+        for(int i=0; i < this.caixasContratados.size();i++){
+            if(this.caixasContratados.get(i).getId().equals(caixa.getId())){
+                aux = i;
+                break;
             }
+        }
+        if(aux>=0){
+            this.caixasContratados.get(aux).adicionarPedidoDeEstoque(pedido);
+            return true;
         }
         return false;
     }

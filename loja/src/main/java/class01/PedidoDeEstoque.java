@@ -27,6 +27,16 @@ public class PedidoDeEstoque {
         return gerenteResponsavel;
     }
 
+    @Override
+    public String toString() {
+        String aux = "(";
+        for(int i=0; i<this.produtos.size(); i++){
+            aux += produtos.get(i).getNome() + " quantidade: " + quantidade.get(i) + " / ";
+        }
+        aux +=")";
+        return aux;
+    }
+
 
     public PedidoDeEstoque(Gerente gerenteResponsavel, List<Produtos> produtos, List<Integer> quantidade){
         this.gerenteResponsavel = gerenteResponsavel;

@@ -2,6 +2,7 @@ package projeto;
 
 import java.io.IOException;
 
+import class01.Caixa;
 import class01.Gerente;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,7 @@ public class App extends Application {
     @SuppressWarnings("exports")
     @Override
     public void start(Stage primaryStage) {
+
         primaryStage.setTitle("Login - Loja de Eletrônicos");
 
         GridPane grid = new GridPane();
@@ -80,8 +82,11 @@ public class App extends Application {
                 case "@gestor.com":
                     errorMessage.setText("Acesso permitido ao módulo: " + selectedModule);
 
+
                     /////////////////////////
                     Gerente gerente = new Gerente("Arnaldo", "123456", 550, 0.1);
+                    gerente.contratarCaixa(new Caixa("Jorge", "55555", 200, 950));
+                    gerente.contratarCaixa(new Caixa("Fábio", "57777", 200, 950));
                     Stage stage2 = new Stage();
                     SceneGerenciamento(gerente, stage2);
                     /////////////////////////
@@ -138,6 +143,7 @@ public class App extends Application {
     private void SceneGerenciamento(Gerente gerente, Stage stage){
         Parent root;
         try {
+            GerenciamentoController.gerente = gerente;
             root = FXMLLoader.load(getClass().getResource("Gerenciamento.fxml"));
             Scene scene = new Scene(root);
 	        stage.setScene(scene);
