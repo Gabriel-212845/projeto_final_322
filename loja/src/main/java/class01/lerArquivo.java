@@ -18,7 +18,7 @@ public class lerArquivo {
     public List<Gerente> lArquivo(String path) {
         List<Gerente> gerentes = new ArrayList<>();
         try {
-            List<Caixa> caixas = new ArrayList<>();
+            List<List<Caixa>> caixas = new ArrayList<>();
             List<Pessoas> pessoas = new ArrayList<>();
             File file = new File(path);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -36,12 +36,14 @@ public class lerArquivo {
                 gerentes.add(gerente1);
 
                 NodeList CaixasNodes = itemElement.getElementsByTagName("caixasContratados").item(0).getChildNodes();
+                List<Caixa> caixas2 = new ArrayList<>();
                 for(int j=0; j < CaixasNodes.getLength(); j++){
                     Caixa caixa1 = criarCaixa(CaixasNodes.item(j), pessoas);
                     gerente1.addCaixaCont(caixa1);
                     pessoas.add(caixa1);
-                    caixas.add(caixa1);
+                    caixas2.add(caixa1);
                 }
+                caixas.add(caixas2);
 
                 
             }
@@ -51,7 +53,8 @@ public class lerArquivo {
 
                 NodeList CaixasNodes = itemElement.getElementsByTagName("caixasContratados").item(0).getChildNodes();
                 for(int j=0; j < CaixasNodes.getLength(); j++){
-                    caixas.get(i).setClientes(lerListaClientes(itemElement.getElementsByTagName("clientes").item(0), pessoas));
+                    Element caixaElement = (Element)CaixasNodes.item(j);
+                    caixas.get(i).get(j).setClientes(lerListaClientes(caixaElement.getElementsByTagName("clientes").item(0), pessoas));
                 }
 
                 
