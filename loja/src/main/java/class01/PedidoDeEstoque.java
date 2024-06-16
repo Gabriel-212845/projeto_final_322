@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public class PedidoDeEstoque {
-    private Gerente gerenteResponsavel;
+    private String idGerenteResponsavel;
     private List<Produtos> produtos;
     private List<Integer> quantidade;
     private LocalDate data;
@@ -23,8 +23,8 @@ public class PedidoDeEstoque {
     public double getValorTotal() {
         return valorTotal;
     }
-    public Gerente getGerenteResponsavel() {
-        return gerenteResponsavel;
+    public String getIdGerenteResponsavel() {
+        return idGerenteResponsavel;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class PedidoDeEstoque {
 
 
     public PedidoDeEstoque(Gerente gerenteResponsavel, List<Produtos> produtos, List<Integer> quantidade){
-        this.gerenteResponsavel = gerenteResponsavel;
+        this.idGerenteResponsavel = gerenteResponsavel.getId();
         this.produtos = produtos;
         this.quantidade = quantidade;
         this.data = LocalDate.now();
@@ -48,6 +48,15 @@ public class PedidoDeEstoque {
             aux += produtos.get(i).getPrecoCusto() * quantidade.get(i);
         }
         this.valorTotal = aux;
+    }
+
+    public PedidoDeEstoque(String idGerenteResponsavel, List<Produtos> produtos, List<Integer> quantidade, LocalDate data,
+                           double valorTotal){
+        this.idGerenteResponsavel = idGerenteResponsavel;
+        this.produtos = produtos;
+        this.quantidade = quantidade;
+        this.data = data;
+        this.valorTotal = valorTotal;
     }
 
 }

@@ -98,4 +98,14 @@ public class Compra {
         this.valorPago = aux - aux * desconto;
         this.dataDoPedido = LocalDate.now();
     }
+
+    public Compra(List<Produtos> produtos, List<Integer> quantidade, double desconto, double valorPago, LocalDate dataDoPedido,
+                  LocalDate dataDoPagamento){
+        this.produtos = produtos;
+        this.quantidade = quantidade;
+        this.desconto = desconto;
+        this.valorPago = valorPago;
+        this.dataDoPagamento = dataDoPagamento;
+        this.dataDoPedido = dataDoPedido;
+    }
 }

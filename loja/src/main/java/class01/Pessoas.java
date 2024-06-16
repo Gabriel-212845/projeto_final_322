@@ -91,5 +91,18 @@ abstract public class Pessoas {
 
     }
 
+    public Pessoas(String nome, String id, double descontoEspecial, double saldo, Compra carrinho, List<Compra> comprasAguardandoPostagem,
+                   List<Compra> comprasEmTransito, List<Compra> historicoDeCompras){
+        this.nome = nome;
+        this.id = id;
+        this.descontoEspecial = descontoEspecial;
+        this.saldo = saldo;
+        this.carrinho = carrinho;
+        this.comprasAguardandoPostagem = comprasAguardandoPostagem;
+        this.comprasEmTransito = comprasEmTransito;
+        this.historicoDeCompras = historicoDeCompras;
+
+    }
+
 
 }

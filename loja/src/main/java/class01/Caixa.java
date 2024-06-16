@@ -49,6 +49,13 @@ public class Caixa extends Pessoas implements Estocar{
     public void setDataDeContratacao(LocalDate dataDeContratacao) {
         this.dataDeContratacao = dataDeContratacao;
     }
+    public void setClientes(List<Pessoas> clientes) {
+        this.clientes = clientes;
+    }
+
+    public static void setEstoque(Estoque esttoque){
+        estoque = esttoque;
+    }
 
 
 
@@ -152,6 +159,37 @@ public class Caixa extends Pessoas implements Estocar{
         this.historicoDePedidos = new ArrayList<>();
         this.clientes = new ArrayList<>();
     }
+    public Caixa(String nome, String id, double descontoEspecial, double saldo, Compra carrinho, List<Compra> comprasAguardandoPostagem,
+                 List<Compra> comprasEmTransito, List<Compra> historicoDeCompras, LocalDate dataDeContratacao, double salario,
+                 int faltasSemJust, PedidoDeAumento pedidoDeAumento, List<PedidoDeAumento> historicoDeAumentos, Estoque estoque,
+                 List<PedidoDeEstoque> pedidosDeEstoque, List<PedidoDeEstoque> historicoDePedidos, List<Pessoas> clientes){
+        super(nome, id, descontoEspecial, saldo, carrinho, comprasAguardandoPostagem, comprasEmTransito, historicoDeCompras);
+        this.dataDeContratacao = dataDeContratacao;
+        this.salario = salario;
+        this.faltasSemJust = faltasSemJust;
+        this.pedidoDeAumento = pedidoDeAumento;
+        this.historicoDeAumentos = historicoDeAumentos;
+        Caixa.setEstoque(estoque);
+        this.pedidosDeEstoque = pedidosDeEstoque;
+        this.historicoDePedidos = historicoDePedidos;
+        this.clientes = clientes;
+    }
+
+    public Caixa(String nome, String id, double descontoEspecial, double saldo, Compra carrinho, List<Compra> comprasAguardandoPostagem,
+                 List<Compra> comprasEmTransito, List<Compra> historicoDeCompras, LocalDate dataDeContratacao, double salario,
+                 int faltasSemJust, PedidoDeAumento pedidoDeAumento, List<PedidoDeAumento> historicoDeAumentos, Estoque estoque,
+                 List<PedidoDeEstoque> pedidosDeEstoque, List<PedidoDeEstoque> historicoDePedidos){
+        super(nome, id, descontoEspecial, saldo, carrinho, comprasAguardandoPostagem, comprasEmTransito, historicoDeCompras);
+        this.dataDeContratacao = dataDeContratacao;
+        this.salario = salario;
+        this.faltasSemJust = faltasSemJust;
+        this.pedidoDeAumento = pedidoDeAumento;
+        this.historicoDeAumentos = historicoDeAumentos;
+        Caixa.setEstoque(estoque);
+        this.pedidosDeEstoque = pedidosDeEstoque;
+        this.historicoDePedidos = historicoDePedidos;
+    }
+
 
 
 }

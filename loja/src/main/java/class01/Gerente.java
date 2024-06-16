@@ -8,7 +8,7 @@ public class Gerente extends Pessoas implements Gerir{
     private static double cofre;
     private double lucro;
     private List<Caixa> caixasContratados;
-    private List<Integer> historicoDeRendimentos;
+    private List<Double> historicoDeRendimentos;
 
     public static double getCofre() {
         return cofre;
@@ -19,10 +19,16 @@ public class Gerente extends Pessoas implements Gerir{
     public List<Caixa> getCaixasContratados() {
         return caixasContratados;
     }
-    public List<Integer> getHistoricoDeRendimentos() {
+    public List<Double> getHistoricoDeRendimentos() {
         return historicoDeRendimentos;
     }
+    public void setCaixasContratados(List<Caixa> caixasContratados) {
+        this.caixasContratados = caixasContratados;
+    }
 
+    public static void setCofre(double cofrre){
+        cofre = cofrre;
+    }
 
 
     public void colocarNoCofre(double valorGanho){
@@ -35,6 +41,10 @@ public class Gerente extends Pessoas implements Gerir{
 
     public void contratarCaixa(Caixa caixa){
         caixa.setDataDeContratacao(LocalDate.now());
+        caixasContratados.add(caixa);
+    }
+
+    public void addCaixaCont(Caixa caixa){
         caixasContratados.add(caixa);
     }
 
@@ -149,6 +159,23 @@ public class Gerente extends Pessoas implements Gerir{
         this.descontoEspecial = 0.1;
         this.caixasContratados = new ArrayList<>();
         this.historicoDeRendimentos = new ArrayList<>();
+    }
+    public Gerente(String nome, String id, double descontoEspecial, double saldo, Compra carrinho, List<Compra> comprasAguardandoPostagem,
+                 List<Compra> comprasEmTransito, List<Compra> historicoDeCompras, double cofre, double lucro, List<Caixa> caixasContratados,
+                 List<Double> historicoDeRendimentos){
+        super(nome, id, descontoEspecial, saldo, carrinho, comprasAguardandoPostagem, comprasEmTransito, historicoDeCompras);
+        Gerente.setCofre(cofre);
+        this.lucro = lucro;
+        this.caixasContratados = caixasContratados;
+        this.historicoDeRendimentos = historicoDeRendimentos;
+    }
+    public Gerente(String nome, String id, double descontoEspecial, double saldo, Compra carrinho, List<Compra> comprasAguardandoPostagem,
+                 List<Compra> comprasEmTransito, List<Compra> historicoDeCompras, double cofre, double lucro,
+                 List<Double> historicoDeRendimentos){
+        super(nome, id, descontoEspecial, saldo, carrinho, comprasAguardandoPostagem, comprasEmTransito, historicoDeCompras);
+        Gerente.setCofre(cofre);
+        this.lucro = lucro;
+        this.historicoDeRendimentos = historicoDeRendimentos;
     }
 
 

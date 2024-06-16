@@ -1,5 +1,6 @@
 package class01;
 
+import java.util.List;
 import java.util.Random;
 
 public class Cliente extends Pessoas{
@@ -26,5 +27,13 @@ public class Cliente extends Pessoas{
         this.descontoEspecial = descontoEspecial;
         this.saldo = saldo;
     }
+
+    public Cliente(String nome, String id, double descontoEspecial, double saldo, Compra carrinho, List<Compra> comprasAguardandoPostagem,
+                   List<Compra> comprasEmTransito, List<Compra> historicoDeCompras){
+        super(nome, id, descontoEspecial, saldo, carrinho, comprasAguardandoPostagem, comprasEmTransito, historicoDeCompras);
+
+    }
+
+
 
 }
