@@ -15,7 +15,7 @@ import org.w3c.dom.NodeList;
 
 
 public class lerArquivo {
-    public List<Gerente> lArquivo(String path) {
+    public static List<Gerente> lArquivo(String path) {
         List<Gerente> gerentes = new ArrayList<>();
         try {
             List<List<Caixa>> caixas = new ArrayList<>();
@@ -32,12 +32,15 @@ public class lerArquivo {
                 Element itemElement = (Element)nodeList.item(i);
 
                 Gerente gerente1 = criarGerente(nodeList.item(i), pessoas);
+                //System.out.println(gerente1);
                 pessoas.add(gerente1);
                 gerentes.add(gerente1);
 
-                NodeList CaixasNodes = itemElement.getElementsByTagName("caixasContratados").item(0).getChildNodes();
+                Element aux = (Element)itemElement.getElementsByTagName("caixasContratados").item(0);
+                NodeList CaixasNodes = aux.getElementsByTagName("Caixa");
                 List<Caixa> caixas2 = new ArrayList<>();
                 for(int j=0; j < CaixasNodes.getLength(); j++){
+                    //System.out.println(CaixasNodes.item(j).getNodeName());
                     Caixa caixa1 = criarCaixa(CaixasNodes.item(j), pessoas);
                     gerente1.addCaixaCont(caixa1);
                     pessoas.add(caixa1);
@@ -51,7 +54,11 @@ public class lerArquivo {
 
                 Element itemElement = (Element)nodeList.item(i);
 
-                NodeList CaixasNodes = itemElement.getElementsByTagName("caixasContratados").item(0).getChildNodes();
+
+
+                Element aux = (Element)itemElement.getElementsByTagName("caixasContratados").item(0);
+                NodeList CaixasNodes = aux.getElementsByTagName("Caixa");
+                //NodeList CaixasNodes = itemElement.getElementsByTagName("caixasContratados").item(0).getChildNodes();
                 for(int j=0; j < CaixasNodes.getLength(); j++){
                     Element caixaElement = (Element)CaixasNodes.item(j);
                     caixas.get(i).get(j).setClientes(lerListaClientes(caixaElement.getElementsByTagName("clientes").item(0), pessoas));
@@ -71,7 +78,7 @@ public class lerArquivo {
 
 
 
-    public Produtos lerProduto(Element element){
+    public static Produtos lerProduto(Element element){
         double precoCusto = Double.parseDouble(element.getElementsByTagName("precoCusto").item(0).getTextContent());
         double precoVenda = Double.parseDouble(element.getElementsByTagName("precoVenda").item(0).getTextContent());
         String nomePr = element.getElementsByTagName("nome").item(0).getTextContent();
@@ -80,7 +87,9 @@ public class lerArquivo {
         boolean promocao = stringToBoolean(element.getElementsByTagName("promocao").item(0).getTextContent());
         String pathPr = element.getElementsByTagName("path").item(0).getTextContent();
 
-        if(element.getElementsByTagName("teclado") == null && element.getElementsByTagName("qtdChips") == null){//Tv
+        //System.out.println(element.getElementsByTagName("teclado").item(0));
+
+        if(element.getElementsByTagName("teclado").item(0) == null && element.getElementsByTagName("qtdChips").item(0) == null){//Tv
 
             double tamanhoTela = Double.parseDouble(element.getElementsByTagName("tamanhoTela").item(0).getTextContent());
             String resolucaoTela = element.getElementsByTagName("resolucaoTela").item(0).getTextContent();
@@ -91,7 +100,7 @@ public class lerArquivo {
             return new Tv(precoCusto, precoVenda, nomePr, marca, fornecedor, promocao, pathPr, tamanhoTela,
                         resolucaoTela, tipoTela, smart, suport, consumoEnergia);
 
-        } else if(element.getElementsByTagName("smart") == null && element.getElementsByTagName("caneta") == null){//Celular
+        } else if(element.getElementsByTagName("smart").item(0) == null && element.getElementsByTagName("caneta").item(0) == null){//Celular
 
             double tamanhoTela = Double.parseDouble(element.getElementsByTagName("tamanhoTela").item(0).getTextContent());
             int qtdChips = Integer.parseInt(element.getElementsByTagName("qtdChips").item(0).getTextContent());
@@ -102,7 +111,7 @@ public class lerArquivo {
             return new Celular(precoCusto, precoVenda, nomePr, marca, fornecedor, promocao, pathPr, tamanhoTela,
                             qtdChips, armazenamento, resolucaoCamera, capacidadeBateria, resistencias);
 
-        } else if(element.getElementsByTagName("smart") == null && element.getElementsByTagName("qtdChips") == null){//Tablet
+        } else if(element.getElementsByTagName("smart").item(0) == null && element.getElementsByTagName("qtdChips").item(0) == null){//Tablet
 
             double tamanhoTela = Double.parseDouble(element.getElementsByTagName("tamanhoTela").item(0).getTextContent());
             int armazenamento = Integer.parseInt(element.getElementsByTagName("armazenamento").item(0).getTextContent());
@@ -119,10 +128,14 @@ public class lerArquivo {
 
 
 
-    public Compra lerCompra(Node node){
+    public static Compra lerCompra(Node node){
         NodeList carrinhoNodes = node.getChildNodes();
         List<Produtos> produtosCarrinho = new ArrayList<>();
         List<Integer> quantidadeCarrinho = new ArrayList<>();
+
+        if(node.getChildNodes().getLength() == 0){
+            return null;
+        }
 
         NodeList listaProdutosCarrinhoNodes = carrinhoNodes.item(0).getChildNodes();
         NodeList listaquantidadesCarrinhoNodes = carrinhoNodes.item(1).getChildNodes();
@@ -151,9 +164,9 @@ public class lerArquivo {
 
 
 
-    public PedidoDeAumento lerPedidoDeAumento(Node node){
+    public static PedidoDeAumento lerPedidoDeAumento(Node node){
 
-        if(!node.getTextContent().equals("null")){
+        if(node.getChildNodes().getLength() != 0){
 
 
             NodeList pedidoAumentoNodes = node.getChildNodes();
@@ -166,30 +179,30 @@ public class lerArquivo {
         } else return null;
     }
 
-    public Estoque lerEstoque(Node node){
+    public static Estoque lerEstoque(Node node){
+        //System.out.println(node.getChildNodes().item(0).getNodeName());
+        if(node.getChildNodes().getLength() == 0) return null;
 
-        NodeList estoqueNodes = node.getChildNodes();
         List<Produtos> produtosEstoque = new ArrayList<>();
         List<Integer> quantidadeEstoque = new ArrayList<>();
 
-        NodeList listaProdutosEstoqueNodes = estoqueNodes.item(0).getChildNodes();
-        NodeList listaquantidadesEstoqueNodes = estoqueNodes.item(1).getChildNodes();
+        Element estoqueElement = (Element) node;
 
-        for(int j = 0; j < listaProdutosEstoqueNodes.getLength(); j++){
-            NodeList produtosEstoqueNodes = listaProdutosEstoqueNodes.item(j).getChildNodes();
-            Element produtosEstoqueElement = (Element)produtosEstoqueNodes;
-            if(lerProduto(produtosEstoqueElement) != null){
-                produtosEstoque.add(lerProduto(produtosEstoqueElement));
-                quantidadeEstoque.add(Integer.parseInt(listaquantidadesEstoqueNodes.item(j).getTextContent()));
+        Element produtosNoEstoqueElement = (Element) estoqueElement.getElementsByTagName("produtosNoEstoque").item(0);
+        Element quantDoProdutoElement = (Element) estoqueElement.getElementsByTagName("quantDoProduto").item(0);
+
+        for(int j = 0; j < produtosNoEstoqueElement.getElementsByTagName("Produto").getLength(); j++){
+            Element produtoElement = (Element) produtosNoEstoqueElement.getElementsByTagName("Produto").item(j);
+            if(lerProduto(produtoElement) != null){
+                produtosEstoque.add(lerProduto(produtoElement));
+                quantidadeEstoque.add(Integer.parseInt(quantDoProdutoElement.getElementsByTagName("int").item(j).getTextContent()));
             }
         }
-
-
         return new Estoque(produtosEstoque, quantidadeEstoque);
     }
 
-    public PedidoDeEstoque lerPedidoDeEstoque(Node node){
-        if(!node.getTextContent().equals("null")){
+    public static PedidoDeEstoque lerPedidoDeEstoque(Node node){
+        if(node.getChildNodes().getLength() != 0){
             NodeList pedidoDeEstoqueNodes = node.getChildNodes();
 
             String idGerenteResponsavel = pedidoDeEstoqueNodes.item(0).getTextContent();
@@ -216,7 +229,7 @@ public class lerArquivo {
     }
 
     //////////////////////////////////////////////////////////////////////
-    public List<Pessoas> lerListaClientes(Node node, List<Pessoas> pessoas){
+    public static List<Pessoas> lerListaClientes(Node node, List<Pessoas> pessoas){
         List<Pessoas> clientes = new ArrayList<>();
         for(int i = 0; i < node.getChildNodes().getLength(); i++){
             Element clienteElement  = (Element)node.getChildNodes().item(i);
@@ -270,8 +283,9 @@ public class lerArquivo {
 
 
 
-    public Caixa criarCaixa(Node node, List<Pessoas> pessoas){
+    public static Caixa criarCaixa(Node node, List<Pessoas> pessoas){
 
+        //System.out.println(node.getNodeName());
         Element itemElement = (Element)node;
 
         String nome = itemElement.getElementsByTagName("nome").item(0).getTextContent();
@@ -339,12 +353,13 @@ public class lerArquivo {
                                  historicoDeCompras, dataDeContratacao, salario, faltasSemJust, pedidoDeAumento, historicoDeAumentos,
                                 estoque, pedidosDeEstoque, historicoDePedidos);
         pessoas.add(caixa);
+        //System.out.println(caixa);
         return caixa;
     
     }
 
 
-    public Gerente criarGerente(Node node, List<Pessoas> pessoas){
+    public static Gerente criarGerente(Node node, List<Pessoas> pessoas){
 
         Element itemElement = (Element)node;
 
@@ -381,8 +396,10 @@ public class lerArquivo {
 
         NodeList HRendimentosNodes = itemElement.getElementsByTagName("historicoDeRendimentos").item(0).getChildNodes();
         List<Double> historicoDeRendimentos = new ArrayList<>();
-        for(int j=0; j < HRendimentosNodes.getLength(); j++){
-            historicoDeRendimentos.add(Double.parseDouble(HRendimentosNodes.item(j).getTextContent()));
+        if(itemElement.getElementsByTagName("historicoDeRendimentos").item(0).getChildNodes().getLength() != 0){
+            for(int j=0; j < HRendimentosNodes.getLength(); j++){
+                historicoDeRendimentos.add(Double.parseDouble(HRendimentosNodes.item(j).getTextContent()));
+            }
         }
 
 
@@ -403,7 +420,7 @@ public class lerArquivo {
 
 
 
-    public boolean stringToBoolean(String Boolean){
+    public static boolean stringToBoolean(String Boolean){
         if(Boolean.equals("true")) return true;
         else return false;
     }

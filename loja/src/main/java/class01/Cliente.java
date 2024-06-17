@@ -6,6 +6,11 @@ import java.util.Random;
 public class Cliente extends Pessoas{
 
 
+    public String getClasse() {
+        return "Cliente";
+    }
+
+
 
     public double pedirDesconto(Compra compra){
         Random rand = new Random();

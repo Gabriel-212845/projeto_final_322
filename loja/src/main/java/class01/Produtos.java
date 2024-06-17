@@ -69,6 +69,9 @@ public abstract class Produtos {
     public void setPromocao(boolean promocao) {
         this.promocao = promocao;
     }
+    public String getPath() {
+        return path;
+    }
 
     public String getClasse(){
         return "Produtos";

@@ -22,6 +22,12 @@ public class Gerente extends Pessoas implements Gerir{
     public List<Double> getHistoricoDeRendimentos() {
         return historicoDeRendimentos;
     }
+    public String getClasse() {
+        return "Gerente";
+    }
+
+
+
     public void setCaixasContratados(List<Caixa> caixasContratados) {
         this.caixasContratados = caixasContratados;
     }
@@ -45,7 +51,7 @@ public class Gerente extends Pessoas implements Gerir{
     }
 
     public void addCaixaCont(Caixa caixa){
-        caixasContratados.add(caixa);
+        if(caixa != null) this.caixasContratados.add(caixa);
     }
 
     public void demitirCaixa(Caixa caixa){
@@ -152,6 +158,16 @@ public class Gerente extends Pessoas implements Gerir{
 
 
 
+    @Override
+    public String toString() {
+        String aux = "Gerente \n";
+        aux += nome + id + descontoEspecial + saldo + "\n" + carrinho + "\n" +comprasAguardandoPostagem + "\n" +comprasEmTransito+"\n" +
+               historicoDeCompras+"\n" + Gerente.getCofre() +"\n"+ lucro +"\n"+ caixasContratados +"\n"+ historicoDeRendimentos+"\n";
+        return aux;
+    }
+
+
+
 
     public Gerente(String nome, String id, double saldo, double lucro) {
         super(nome, id, saldo);
@@ -175,6 +191,7 @@ public class Gerente extends Pessoas implements Gerir{
         super(nome, id, descontoEspecial, saldo, carrinho, comprasAguardandoPostagem, comprasEmTransito, historicoDeCompras);
         Gerente.setCofre(cofre);
         this.lucro = lucro;
+        this.caixasContratados = new ArrayList<>();
         this.historicoDeRendimentos = historicoDeRendimentos;
     }
 

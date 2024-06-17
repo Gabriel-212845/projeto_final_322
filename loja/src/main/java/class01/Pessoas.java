@@ -35,6 +35,13 @@ abstract public class Pessoas {
     public List<Compra> getHistoricoDeCompras() {
         return historicoDeCompras;
     }
+    public double getSaldo() {
+        return saldo;
+    }
+    public String getClasse() {
+        return "Pessoas";
+    }
+    
 
     public void adicionarAoCarrinho(Produtos produto, int quant){
         if(carrinho == null){
@@ -71,8 +78,6 @@ abstract public class Pessoas {
         return true;
 
     }
-
-
 
 
 
