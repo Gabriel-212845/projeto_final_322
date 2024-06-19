@@ -40,7 +40,7 @@ public class Caixa extends Pessoas implements Estocar{
         return clientes;
     }
     public String getClasse() {
-        return "Cliente";
+        return "Caixa";
     }
 
     public void setPedidoDeAumento(PedidoDeAumento pedidoDeAumento) {
@@ -54,6 +54,15 @@ public class Caixa extends Pessoas implements Estocar{
     }
     public void setClientes(List<Pessoas> clientes) {
         this.clientes = clientes;
+    }
+    public void setHistoricoDeAumentos(List<PedidoDeAumento> historicoDeAumentos) {
+        this.historicoDeAumentos = historicoDeAumentos;
+    }
+    public void setPedidosDeEstoque(List<PedidoDeEstoque> pedidosDeEstoque) {
+        this.pedidosDeEstoque = pedidosDeEstoque;
+    }
+    public void setHistoricoDePedidos(List<PedidoDeEstoque> historicoDePedidos) {
+        this.historicoDePedidos = historicoDePedidos;
     }
 
     public static void setEstoque(Estoque esttoque){

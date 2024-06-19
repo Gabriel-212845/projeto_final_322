@@ -26,6 +26,9 @@ public class PedidoDeEstoque {
     public String getIdGerenteResponsavel() {
         return idGerenteResponsavel;
     }
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
 
     @Override
     public String toString() {

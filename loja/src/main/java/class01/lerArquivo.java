@@ -168,11 +168,10 @@ public class lerArquivo {
 
         if(node.getChildNodes().getLength() != 0){
 
+            Element pedidoAumentoelement = (Element) node;
 
-            NodeList pedidoAumentoNodes = node.getChildNodes();
-
-            String idRequerente = pedidoAumentoNodes.item(0).getTextContent();
-            LocalDate data = LocalDate.parse(pedidoAumentoNodes.item(1).getTextContent());
+            String idRequerente = pedidoAumentoelement.getElementsByTagName("idRequerente").item(0).getTextContent();
+            LocalDate data = LocalDate.parse(pedidoAumentoelement.getElementsByTagName("data").item(0).getTextContent());
     
 
             return new PedidoDeAumento(idRequerente, data);
@@ -198,31 +197,39 @@ public class lerArquivo {
                 quantidadeEstoque.add(Integer.parseInt(quantDoProdutoElement.getElementsByTagName("int").item(j).getTextContent()));
             }
         }
-        return new Estoque(produtosEstoque, quantidadeEstoque);
+        return Estoque.getInstance(produtosEstoque, quantidadeEstoque);
     }
 
     public static PedidoDeEstoque lerPedidoDeEstoque(Node node){
         if(node.getChildNodes().getLength() != 0){
-            NodeList pedidoDeEstoqueNodes = node.getChildNodes();
 
-            String idGerenteResponsavel = pedidoDeEstoqueNodes.item(0).getTextContent();
+
+            Element pedidoDeEstoqueElement = (Element) node;
+
+
+            String idGerenteResponsavel = pedidoDeEstoqueElement.getElementsByTagName("idGerenteResponsavel").item(0).getTextContent();
             List<Produtos> produtosPEstoque = new ArrayList<>();
             List<Integer> quantidadePEstoque = new ArrayList<>();
 
-            NodeList listaProdutosPEstoqueNodes = pedidoDeEstoqueNodes.item(1).getChildNodes();
-            NodeList listaquantidadesPEstoqueNodes = pedidoDeEstoqueNodes.item(2).getChildNodes();
+            Element produtos = (Element)pedidoDeEstoqueElement.getElementsByTagName("produtos").item(0);
+            Element quantidade = (Element)pedidoDeEstoqueElement.getElementsByTagName("quantidade").item(0);
+            NodeList produto = produtos.getElementsByTagName("Produto");
+            NodeList int_ = quantidade.getElementsByTagName("int");
 
-            for(int j = 0; j < listaProdutosPEstoqueNodes.getLength(); j++){
-                NodeList produtosPEstoqueNodes = listaProdutosPEstoqueNodes.item(j).getChildNodes();
-                Element produtosPEstoqueElement = (Element)produtosPEstoqueNodes;
+            for(int j = 0; j < produto.getLength(); j++){
+
+                Element produtosPEstoqueElement = (Element)produto.item(j);
                 if(lerProduto(produtosPEstoqueElement) != null){
                     produtosPEstoque.add(lerProduto(produtosPEstoqueElement));
-                    quantidadePEstoque.add(Integer.parseInt(listaquantidadesPEstoqueNodes.item(j).getTextContent()));
+                    quantidadePEstoque.add(Integer.parseInt(int_.item(j).getTextContent()));
                 }
+
             }
 
-            LocalDate data = LocalDate.parse(pedidoDeEstoqueNodes.item(3).getTextContent());
-            double valorTotal = Double.parseDouble(pedidoDeEstoqueNodes.item(4).getTextContent());
+
+            LocalDate data = LocalDate.parse(pedidoDeEstoqueElement.getElementsByTagName("data").item(0).getTextContent());
+            double valorTotal = Double.parseDouble(pedidoDeEstoqueElement.getElementsByTagName("valorTotal").item(0).getTextContent());
+
 
             return new PedidoDeEstoque(idGerenteResponsavel, produtosPEstoque, quantidadePEstoque, data, valorTotal);
         } else return null;
