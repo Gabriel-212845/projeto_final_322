@@ -58,7 +58,6 @@ public class lerArquivo {
 
                 Element aux = (Element)itemElement.getElementsByTagName("caixasContratados").item(0);
                 NodeList CaixasNodes = aux.getElementsByTagName("Caixa");
-                //NodeList CaixasNodes = itemElement.getElementsByTagName("caixasContratados").item(0).getChildNodes();
                 for(int j=0; j < CaixasNodes.getLength(); j++){
                     Element caixaElement = (Element)CaixasNodes.item(j);
                     caixas.get(i).get(j).setClientes(lerListaClientes(caixaElement.getElementsByTagName("clientes").item(0), pessoas));
@@ -129,33 +128,34 @@ public class lerArquivo {
 
 
     public static Compra lerCompra(Node node){
-        NodeList carrinhoNodes = node.getChildNodes();
+        Element element = (Element) node;
+
         List<Produtos> produtosCarrinho = new ArrayList<>();
         List<Integer> quantidadeCarrinho = new ArrayList<>();
 
-        if(node.getChildNodes().getLength() == 0){
+        if(element.getChildNodes().getLength() == 0){
             return null;
         }
 
-        NodeList listaProdutosCarrinhoNodes = carrinhoNodes.item(0).getChildNodes();
-        NodeList listaquantidadesCarrinhoNodes = carrinhoNodes.item(1).getChildNodes();
+        NodeList listaProdutosCarrinhoNodes = element.getElementsByTagName("Produtos");
+        NodeList listaquantidadesCarrinhoNodes =element.getElementsByTagName("quantidade");
 
         for(int j = 0; j < listaProdutosCarrinhoNodes.getLength(); j++){
-            NodeList produtosCarrinhoNodes = listaProdutosCarrinhoNodes.item(j).getChildNodes();
-            Element produtosCarrinhoElement = (Element)produtosCarrinhoNodes;
+            NodeList produtosCarrinhoNodes = ((Element)listaProdutosCarrinhoNodes.item(0)).getElementsByTagName("Produto");
+            Element produtosCarrinhoElement = (Element)produtosCarrinhoNodes.item(j);
             if(lerProduto(produtosCarrinhoElement) != null){
                 produtosCarrinho.add(lerProduto(produtosCarrinhoElement));
-                quantidadeCarrinho.add(Integer.parseInt(listaquantidadesCarrinhoNodes.item(j).getTextContent()));
+                quantidadeCarrinho.add(Integer.parseInt(((Element)listaquantidadesCarrinhoNodes.item(0)).getElementsByTagName("int").item(j).getTextContent()));
             }
         }
 
-        double desconto = Double.parseDouble(carrinhoNodes.item(2).getTextContent());
-        double valorPago = Double.parseDouble(carrinhoNodes.item(3).getTextContent());
-        LocalDate dataDoPedido = LocalDate.parse(carrinhoNodes.item(4).getTextContent());
+        double desconto = Double.parseDouble(element.getElementsByTagName("desconto").item(0).getTextContent());
+        double valorPago = Double.parseDouble(element.getElementsByTagName("valorPago").item(0).getTextContent());
+        LocalDate dataDoPedido = LocalDate.parse(element.getElementsByTagName("dataDoPedido").item(0).getTextContent());
 
         LocalDate dataDoPagamento = null;
-        if(!carrinhoNodes.item(5).getTextContent().equals("null")){
-            dataDoPagamento = LocalDate.parse(carrinhoNodes.item(5).getTextContent());
+        if(!element.getElementsByTagName("dataDoPagamento").item(0).getTextContent().equals("null")){
+            dataDoPagamento = LocalDate.parse(element.getElementsByTagName("dataDoPagamento").item(0).getTextContent());
         }
 
         return new Compra(produtosCarrinho, quantidadeCarrinho, desconto, valorPago, dataDoPedido, dataDoPagamento);
@@ -179,7 +179,6 @@ public class lerArquivo {
     }
 
     public static Estoque lerEstoque(Node node){
-        //System.out.println(node.getChildNodes().item(0).getNodeName());
         if(node.getChildNodes().getLength() == 0) return null;
 
         List<Produtos> produtosEstoque = new ArrayList<>();
@@ -238,9 +237,10 @@ public class lerArquivo {
     //////////////////////////////////////////////////////////////////////
     public static List<Pessoas> lerListaClientes(Node node, List<Pessoas> pessoas){
         List<Pessoas> clientes = new ArrayList<>();
-        for(int i = 0; i < node.getChildNodes().getLength(); i++){
-            Element clienteElement  = (Element)node.getChildNodes().item(i);
-            if(!clienteElement.getTagName().equals("Caixa") && !clienteElement.getTagName().equals("Gerente")){
+        Element element = (Element)node;
+        for(int i = 0; i < element.getElementsByTagName("Cliente").getLength(); i++){
+            Element clienteElement  = (Element)element.getElementsByTagName("Cliente").item(i);
+            if(clienteElement.getElementsByTagName("nome").getLength() >0){
 
 
                 String nome = clienteElement.getElementsByTagName("nome").item(0).getTextContent();
@@ -250,19 +250,19 @@ public class lerArquivo {
 
                 Compra carrinho = lerCompra(clienteElement.getElementsByTagName("carrinho").item(0));
 
-                NodeList comprasAPNodes = clienteElement.getElementsByTagName("comprasAguardandoPostagem").item(0).getChildNodes();
+                NodeList comprasAPNodes = ((Element)(clienteElement.getElementsByTagName("comprasAguardandoPostagem").item(0))).getElementsByTagName("compra");
                 List<Compra> comprasAguardandoPostagem = new ArrayList<>();
                 for(int j=0; j < comprasAPNodes.getLength(); j++){
                     comprasAguardandoPostagem.add(lerCompra(comprasAPNodes.item(j)));
                 }
 
-                NodeList comprasETNodes = clienteElement.getElementsByTagName("comprasEmTransito").item(0).getChildNodes();
+                NodeList comprasETNodes = ((Element)(clienteElement.getElementsByTagName("comprasEmTransito").item(0))).getElementsByTagName("compra");
                 List<Compra> comprasEmTransito = new ArrayList<>();
                 for(int j=0; j < comprasETNodes.getLength(); j++){
                     comprasEmTransito.add(lerCompra(comprasETNodes.item(j)));
                 }
 
-                NodeList HComprasNodes = clienteElement.getElementsByTagName("historicoDeCompras").item(0).getChildNodes();
+                NodeList HComprasNodes = ((Element)(clienteElement.getElementsByTagName("historicoDeCompras").item(0))).getElementsByTagName("compra");
                 List<Compra> historicoDeCompras = new ArrayList<>();
                 for(int j=0; j < HComprasNodes.getLength(); j++){
                     historicoDeCompras.add(lerCompra(HComprasNodes.item(j)));
@@ -271,9 +271,9 @@ public class lerArquivo {
                 clientes.add(new Cliente(nome, id, descontoEspecial, saldo, carrinho, comprasAguardandoPostagem, comprasEmTransito, historicoDeCompras));
 
             } else{
-                clienteElement.getElementsByTagName("id").item(0).getTextContent();
+                //clienteElement.getElementsByTagName("id").item(0).getTextContent();
                 for(int j = 0; j< pessoas.size(); j++){
-                    if(pessoas.get(j).getId().equals(clienteElement.getElementsByTagName("id").item(0).getTextContent())){
+                    if(pessoas.get(j).getId().equals(clienteElement.getTextContent())){
                         clientes.add(pessoas.get(j));
                     }
                 }
@@ -302,19 +302,19 @@ public class lerArquivo {
 
         Compra carrinho = lerCompra(itemElement.getElementsByTagName("carrinho").item(0));
 
-        NodeList comprasAPNodes = itemElement.getElementsByTagName("comprasAguardandoPostagem").item(0).getChildNodes();
+        NodeList comprasAPNodes = ((Element)itemElement.getElementsByTagName("comprasAguardandoPostagem").item(0)).getElementsByTagName("compra");
         List<Compra> comprasAguardandoPostagem = new ArrayList<>();
         for(int j=0; j < comprasAPNodes.getLength(); j++){
             comprasAguardandoPostagem.add(lerCompra(comprasAPNodes.item(j)));
         }
 
-        NodeList comprasETNodes = itemElement.getElementsByTagName("comprasEmTransito").item(0).getChildNodes();
+        NodeList comprasETNodes = ((Element)itemElement.getElementsByTagName("comprasEmTransito").item(0)).getElementsByTagName("compra");
         List<Compra> comprasEmTransito = new ArrayList<>();
         for(int j=0; j < comprasETNodes.getLength(); j++){
             comprasEmTransito.add(lerCompra(comprasETNodes.item(j)));
         }
 
-        NodeList HComprasNodes = itemElement.getElementsByTagName("historicoDeCompras").item(0).getChildNodes();
+        NodeList HComprasNodes = ((Element)itemElement.getElementsByTagName("historicoDeCompras").item(0)).getElementsByTagName("compra");
         List<Compra> historicoDeCompras = new ArrayList<>();
         for(int j=0; j < HComprasNodes.getLength(); j++){
             historicoDeCompras.add(lerCompra(HComprasNodes.item(j)));
@@ -327,7 +327,7 @@ public class lerArquivo {
         PedidoDeAumento pedidoDeAumento = lerPedidoDeAumento(itemElement.getElementsByTagName("pedidoDeAumento").item(0));
 
 
-        NodeList HDeAumentosNodes = itemElement.getElementsByTagName("historicoDeAumentos").item(0).getChildNodes();
+        NodeList HDeAumentosNodes = ((Element)itemElement.getElementsByTagName("historicoDeAumentos").item(0)).getElementsByTagName("pedidoDeAumento");
         List<PedidoDeAumento> historicoDeAumentos = new ArrayList<>();
         for(int j=0; j < HDeAumentosNodes.getLength(); j++){
             if(lerPedidoDeAumento(HDeAumentosNodes.item(j)) != null){
@@ -337,7 +337,7 @@ public class lerArquivo {
 
         Estoque estoque = lerEstoque(itemElement.getElementsByTagName("estoque").item(0));
 
-        NodeList PDeEstoqueNodes = itemElement.getElementsByTagName("pedidosDeEstoque").item(0).getChildNodes();
+        NodeList PDeEstoqueNodes = ((Element)itemElement.getElementsByTagName("pedidosDeEstoque").item(0)).getElementsByTagName("pedidoDeEstoque");
         List<PedidoDeEstoque> pedidosDeEstoque = new ArrayList<>();
         for(int j=0; j < PDeEstoqueNodes.getLength(); j++){
             if(lerPedidoDeEstoque(PDeEstoqueNodes.item(j)) != null){
@@ -345,7 +345,7 @@ public class lerArquivo {
             }
         }
 
-        NodeList HDePEstoqueNodes = itemElement.getElementsByTagName("historicoDePedidos").item(0).getChildNodes();
+        NodeList HDePEstoqueNodes = ((Element)itemElement.getElementsByTagName("historicoDePedidos").item(0)).getElementsByTagName("pedidoDeEstoque");
         List<PedidoDeEstoque> historicoDePedidos = new ArrayList<>();
         for(int j=0; j < HDePEstoqueNodes.getLength(); j++){
             if(lerPedidoDeEstoque(HDePEstoqueNodes.item(j)) != null){
@@ -377,19 +377,19 @@ public class lerArquivo {
 
         Compra carrinho = lerCompra(itemElement.getElementsByTagName("carrinho").item(0));
 
-        NodeList comprasAPNodes = itemElement.getElementsByTagName("comprasAguardandoPostagem").item(0).getChildNodes();
+        NodeList comprasAPNodes = ((Element)itemElement.getElementsByTagName("comprasAguardandoPostagem").item(0)).getElementsByTagName("compra");
         List<Compra> comprasAguardandoPostagem = new ArrayList<>();
         for(int j=0; j < comprasAPNodes.getLength(); j++){
             comprasAguardandoPostagem.add(lerCompra(comprasAPNodes.item(j)));
         }
 
-        NodeList comprasETNodes = itemElement.getElementsByTagName("comprasEmTransito").item(0).getChildNodes();
+        NodeList comprasETNodes = ((Element)itemElement.getElementsByTagName("comprasEmTransito").item(0)).getElementsByTagName("compra");
         List<Compra> comprasEmTransito = new ArrayList<>();
         for(int j=0; j < comprasETNodes.getLength(); j++){
             comprasEmTransito.add(lerCompra(comprasETNodes.item(j)));
         }
 
-        NodeList HComprasNodes = itemElement.getElementsByTagName("historicoDeCompras").item(0).getChildNodes();
+        NodeList HComprasNodes = ((Element)itemElement.getElementsByTagName("historicoDeCompras").item(0)).getElementsByTagName("compra");
         List<Compra> historicoDeCompras = new ArrayList<>();
         for(int j=0; j < HComprasNodes.getLength(); j++){
             historicoDeCompras.add(lerCompra(HComprasNodes.item(j)));
@@ -401,9 +401,9 @@ public class lerArquivo {
         double cofre = Double.parseDouble(itemElement.getElementsByTagName("cofre").item(0).getTextContent());
         double lucro = Double.parseDouble(itemElement.getElementsByTagName("lucro").item(0).getTextContent());
 
-        NodeList HRendimentosNodes = itemElement.getElementsByTagName("historicoDeRendimentos").item(0).getChildNodes();
+        NodeList HRendimentosNodes = ((Element)itemElement.getElementsByTagName("historicoDeRendimentos").item(0)).getElementsByTagName("double");
         List<Double> historicoDeRendimentos = new ArrayList<>();
-        if(itemElement.getElementsByTagName("historicoDeRendimentos").item(0).getChildNodes().getLength() != 0){
+        if(HRendimentosNodes.getLength() != 0){
             for(int j=0; j < HRendimentosNodes.getLength(); j++){
                 historicoDeRendimentos.add(Double.parseDouble(HRendimentosNodes.item(j).getTextContent()));
             }

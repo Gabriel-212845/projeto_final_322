@@ -142,6 +142,6 @@ public class Main {
 
 
         List<Gerente> gerentes = lerArquivo.lArquivo("projeto_final_322\\loja\\src\\main\\java\\class01\\save\\output.xml");
-        System.out.println(Caixa.getEstoque());
+        System.out.println(gerentes.get(0).getCaixasContratados().get(0).getClientes().get(0).getComprasAguardandoPostagem().get(0).getProdutos().get(0));
     }
 }
