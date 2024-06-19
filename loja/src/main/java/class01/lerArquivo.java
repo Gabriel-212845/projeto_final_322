@@ -198,7 +198,7 @@ public class lerArquivo {
                 quantidadeEstoque.add(Integer.parseInt(quantDoProdutoElement.getElementsByTagName("int").item(j).getTextContent()));
             }
         }
-        return new Estoque(produtosEstoque, quantidadeEstoque);
+        return Estoque.getInstance(produtosEstoque, quantidadeEstoque);
     }
 
     public static PedidoDeEstoque lerPedidoDeEstoque(Node node){
