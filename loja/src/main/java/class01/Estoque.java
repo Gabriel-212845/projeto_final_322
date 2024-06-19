@@ -51,14 +51,18 @@ public class Estoque {
         return aux;
     }
 
+    private static Estoque instancia;
 
-
-
-
-    public Estoque(List<Produtos> produtosNoEstoque, List<Integer> quantDoProduto){
+    private Estoque (List<Produtos> produtosNoEstoque, List<Integer> quantDoProduto){
         this.produtosNoEstoque = produtosNoEstoque;
         this.quantDoProduto = quantDoProduto;
-    }
+    };
 
+    public static Estoque getInstance(List<Produtos> produtosNoEstoque, List<Integer> quantDoProduto){
+        if(instancia == null){
+            instancia = new Estoque(produtosNoEstoque, quantDoProduto);
+        }
+        return instancia;
+    }
 
 }

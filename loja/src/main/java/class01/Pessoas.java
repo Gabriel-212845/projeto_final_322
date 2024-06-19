@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract public class Pessoas {
+abstract public class Pessoas implements Comprar{
     protected String nome;
     protected String id;
     protected double descontoEspecial;
