@@ -75,6 +75,11 @@ public class lerArquivo {
         return gerentes;
     }
 
+    public static List<Gerente> ler() {
+        String path = "projeto_final_322\\loja\\src\\main\\java\\class01\\save\\output.xml";
+        return lArquivo(path);
+    }
+
 
 
     public static Produtos lerProduto(Element element){

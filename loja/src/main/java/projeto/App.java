@@ -1,9 +1,12 @@
 package projeto;
 
 import java.io.IOException;
+import java.util.List;
 
 import class01.Caixa;
 import class01.Gerente;
+import class01.Pessoas;
+import class01.lerArquivo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -22,6 +25,12 @@ public class App extends Application {
     @SuppressWarnings("exports")
     @Override
     public void start(Stage primaryStage) {
+
+        List<Gerente> gerentes = lerArquivo.ler();
+        Stage stage3 = new Stage();
+        SceneLoja(gerentes.get(0).getCaixasContratados().get(0), gerentes.get(0).getCaixasContratados().get(0).getClientes().get(0), stage3);
+
+
 
         primaryStage.setTitle("Login - Loja de Eletrônicos");
 
@@ -145,6 +154,21 @@ public class App extends Application {
         try {
             GerenciamentoController.gerente = gerente;
             root = FXMLLoader.load(getClass().getResource("Gerenciamento.fxml"));
+            Scene scene = new Scene(root);
+	        stage.setScene(scene);
+	        stage.show();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+    }
+
+    private void SceneLoja(Caixa caixa, Pessoas cliente, Stage stage){
+        Parent root;
+        try {
+            ComprarController.caixa = caixa;
+            ComprarController.cliente = cliente;
+            root = FXMLLoader.load(getClass().getResource("Comprar.fxml"));
             Scene scene = new Scene(root);
 	        stage.setScene(scene);
 	        stage.show();
