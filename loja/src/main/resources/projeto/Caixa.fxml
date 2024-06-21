@@ -34,10 +34,10 @@
                   </HBox>
                   <HBox prefHeight="26.0" prefWidth="560.0" spacing="30.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#switchToPedidosCompra" prefHeight="26.0" prefWidth="136.0" text="Despachar Compras" />
-                        <Button mnemonicParsing="false" onAction="#switchToPedidosCaixa" text="Pedidos de Estoque" />
-                        <Button mnemonicParsing="false" onAction="#PedirAumento" text="Pedir Aumento" />
-                        <Label fx:id="aumentoStatus" prefHeight="18.0" prefWidth="238.0" text="aumento status" textFill="RED" />
+                        <Button mnemonicParsing="false" onAction="#switchToPedidosCompra" prefHeight="26.0" prefWidth="128.0" text="Despachar Compras" />
+                        <Button mnemonicParsing="false" onAction="#switchToPedidosCaixa" prefHeight="26.0" prefWidth="126.0" text="Pedidos de Estoque" />
+                        <Button mnemonicParsing="false" onAction="#PedirAumento" prefHeight="26.0" prefWidth="99.0" text="Pedir Aumento" />
+                        <Label fx:id="aumentoStatus" prefHeight="18.0" prefWidth="202.0" text="aumento status" textFill="RED" />
                      </children>
                   </HBox>
                </children>

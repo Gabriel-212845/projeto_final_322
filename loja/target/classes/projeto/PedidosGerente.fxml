@@ -51,7 +51,7 @@
                   <TextField fx:id="marca" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="Preço de Custo: " GridPane.rowIndex="4" />
                   <Label text="Preço de Venda: " GridPane.rowIndex="5" />
-                  <Label text="Path Imagem: " GridPane.rowIndex="6" />
+                  <Label text="Path Imagem (ex: tv.png): " GridPane.rowIndex="6" />
                   <TextField fx:id="fornecedor" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Tipo De Produto:" />
                   <ChoiceBox fx:id="tipoChoiseBox" onMouseEntered="#atualizarTipoBox" onMouseExited="#atualizarTipoBox" prefHeight="26.0" prefWidth="420.0" GridPane.columnIndex="1" />

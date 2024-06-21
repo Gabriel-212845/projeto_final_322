@@ -47,7 +47,9 @@ public class PedidosCompraController {
 
         for(int i = 0; i < caixa.getClientes().size(); i++){
             for(int j=0; j<caixa.getClientes().get(i).getComprasAguardandoPostagem().size(); j++){
-                compras.add(caixa.getClientes().get(i).getComprasAguardandoPostagem().get(j));
+                if(caixa.getClientes().get(i).getComprasAguardandoPostagem().get(j) != null){
+                    compras.add(caixa.getClientes().get(i).getComprasAguardandoPostagem().get(j));
+                }
             }
         }
 
@@ -78,7 +80,9 @@ public class PedidosCompraController {
             compras.clear();
             for(int i = 0; i < caixa.getClientes().size(); i++){
                 for(int j=0; j<caixa.getClientes().get(i).getComprasAguardandoPostagem().size(); j++){
-                    compras.add(caixa.getClientes().get(i).getComprasAguardandoPostagem().get(j));
+                    if(caixa.getClientes().get(i).getComprasAguardandoPostagem().get(j) != null){
+                        compras.add(caixa.getClientes().get(i).getComprasAguardandoPostagem().get(j));
+                    }
                 }
             }
             tableView.setItems(compras);

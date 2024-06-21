@@ -8,7 +8,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        
+        /*
         Gerente gerente = new Gerente("Arnaldo", "123456", 550, 0.1);
         gerente.contratarCaixa(new Caixa("Jorge", "55555", 200, 950));
         gerente.contratarCaixa(new Caixa("Fábio", "57777", 200, 950));
@@ -150,8 +150,105 @@ public class Main {
         Caixa.setEstoque(Estoque.getInstance(produtos, quantidades));
 
         escrArquivo.salvar(gerentes);
+        */
+
+
+
+        Gerente gerente = new Gerente("Arnaldo Costa", "arnaldo", 550, 0.1);
+        Gerente.setCofre(950000);
+
+        List<Gerente> gerentes = new ArrayList<>();
+        gerentes.add(gerente);
+
+
+
+        Caixa caixa1 = new Caixa("Jorge Silva", "jorge", 200, 950);
+        Caixa caixa2 = new Caixa("Fábio Pereira", "fabio", 200, 950);
+        gerente.contratarCaixa(caixa1);
+        gerente.contratarCaixa(caixa2);
+        caixa1.setDataDeContratacao(LocalDate.parse("2022-05-01"));
+        caixa2.setDataDeContratacao(LocalDate.parse("2024-06-15"));
+
+        List<Produtos> produtos1 = new ArrayList<>();
+        List<Integer> quantidades1 = new ArrayList<>();
+        Celular celular1 = new Celular(100, 1000, "Celular1", "Blue", "Industrias cd", false, "projeto_final_322\\loja\\src\\main\\java\\class01\\Imagens\\celular1.png",
+                                       35, 2, 500, 13, 5000, "À prova d'água");
+        produtos1.add(celular1);
+        quantidades1.add(2);
+        PedidoDeEstoque pedidoEstoque1 = new PedidoDeEstoque(gerente, produtos1, quantidades1);
+        caixa1.adicionarPedidoDeEstoque(pedidoEstoque1);
+
+        Celular celular2 = new Celular(200, 500, "Celular2", "Red", "Industrias Tw", false, "projeto_final_322\\loja\\src\\main\\java\\class01\\Imagens\\celular2.png",
+                                       35, 2, 725, 18, 6000, "Nenhuma");
+        Celular celular3 = new Celular(300, 600, "Celular3", "LT", "Industrias JJ", true, "projeto_final_322\\loja\\src\\main\\java\\class01\\Imagens\\celular3.png",
+                                       30, 3, 125, 12, 5000, "Nenhuma");
+        Celular celular4 = new Celular(500, 1000, "Celular4", "White", "Industrias MN", false, "projeto_final_322\\loja\\src\\main\\java\\class01\\Imagens\\celular4.png",
+                                       14, 1, 725, 18, 6000, "Água e proeira");
+        Tv tv1 = new Tv(200, 900, "Tv1", "Red", "Seu Zé", true, "projeto_final_322\\loja\\src\\main\\java\\class01\\Imagens\\tv1.png",
+                        60, "1080", "LCD", false, true, 100);
+        Tv tv2 = new Tv(50, 150, "Tv2", "BM", "Seu Antônio", false, "projeto_final_322\\loja\\src\\main\\java\\class01\\Imagens\\tv2.png",
+                        50, "720", "LCD", false, false, 200);
+        Tv tv3 = new Tv(500, 1200, "Tv3", "TGM", "Seu Nelson", true, "projeto_final_322\\loja\\src\\main\\java\\class01\\Imagens\\tv3.png",
+                        55, "4K", "OLED", true, true, 500);
+        Tablet tablet1 = new Tablet(400, 700, "Tablet1", "Marca J", "Seu Zé", false, "projeto_final_322\\loja\\src\\main\\java\\class01\\Imagens\\tablet1.png",
+                                    20, 125, 8, 7000, true, false);
+        Tablet tablet2 = new Tablet(200, 700, "Tablet2", "Marca T", "Seu Nelson", true, "projeto_final_322\\loja\\src\\main\\java\\class01\\Imagens\\tablet2.png",
+                                    10, 525, 13, 7000, true, false);
+        Tablet tablet3 = new Tablet(1000, 2000, "Tablet3", "Marca BX", "Seu Nelson", true, "projeto_final_322\\loja\\src\\main\\java\\class01\\Imagens\\tablet3.png",
+                                    100, 800, 25, 9000, false, true);
+
+        List<Produtos> produtos = new ArrayList<>();
+        List<Integer> quantidades = new ArrayList<>();
+        produtos.add(celular2);
+        quantidades.add(2);
+        produtos.add(celular3);
+        quantidades.add(1);
+        produtos.add(celular4);
+        quantidades.add(5);
+        produtos.add(tv1);
+        quantidades.add(2);
+        produtos.add(tv2);
+        quantidades.add(3);
+        produtos.add(tv3);
+        quantidades.add(1);
+        produtos.add(tablet1);
+        quantidades.add(1);
+        produtos.add(tablet2);
+        quantidades.add(3);
+        produtos.add(tablet3);
+        quantidades.add(1);
+        Caixa.setEstoque(Estoque.getInstance(produtos, quantidades));
+
+
+        Cliente cliente1 = new Cliente("Roberto Texeira", "roberto", 0.02, 500);
+        Cliente cliente2 = new Cliente("João Peixoto", "joao", 0, 9000);
+
+        List<Compra> comprasAguardandoPostagem = new ArrayList<>();
+        List<Produtos> produtos2 = new ArrayList<>();
+        List<Integer> quantidades2 = new ArrayList<>();
+        produtos2.add(tv1);
+        quantidades2.add(1);
+
+        Compra compra1 = new Compra(produtos2, quantidades2, cliente1.getDescontoEspecial());
+        compra1.setDataDoPedido(LocalDate.parse("2024-06-17"));
+        compra1.setDataDoPagamento(LocalDate.parse("2024-06-18"));
+        comprasAguardandoPostagem.add(compra1);
+        cliente1.setComprasAguardandoPostagem(comprasAguardandoPostagem);
+
+        caixa1.adicionarCliente(cliente1);
+        caixa1.adicionarCliente(cliente2);
+        caixa1.adicionarCliente(caixa1);
+
+        caixa2.adicionarCliente(caixa2);
+        caixa2.adicionarCliente(gerente);
+
+
         
-        
+
+        escrArquivo.salvar(gerentes);
+
+
+
 
 
         //List<Gerente> gerentes = lerArquivo.lArquivo("projeto_final_322\\loja\\src\\main\\java\\class01\\save\\output.xml");

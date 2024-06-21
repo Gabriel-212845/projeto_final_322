@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import class01.Gerente;
+import class01.escrArquivo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +31,9 @@ public class GerenciamentoController {
 
 
     @FXML
-    public void initialize() {
+    public void initialize() throws Exception {
+        gerente.analisarPedidosDeAumento();
+        escrArquivo.salvar(Salvar);
         nome.setText(gerente.getNome());
         cofre.setText(String.valueOf(Gerente.getCofre()));
     }

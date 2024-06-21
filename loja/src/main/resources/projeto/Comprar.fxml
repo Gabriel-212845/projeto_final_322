@@ -28,6 +28,8 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Saldo:" wrappingWidth="47.08941650390625" />
             <Label fx:id="saldo" text="Label" />
             <Button mnemonicParsing="false" onAction="#switchAdicionarSaldo" text="Adicionar Saldo" />
+            <Label fx:id="descontoLabel" prefHeight="18.0" prefWidth="106.0" text="Desconco especial: " />
+            <Label fx:id="desconto" prefHeight="18.0" prefWidth="91.0" text="desconto" />
          </children>
       </HBox>
       <AnchorPane prefHeight="239.0" prefWidth="560.0">
@@ -36,7 +38,7 @@
                <children>
                   <HBox prefHeight="39.0" prefWidth="882.0" spacing="30.0">
                      <children>
-                        <TextField fx:id="barraPesquisa" onKeyPressed="#resetTableview" prefHeight="26.0" prefWidth="343.0" />
+                        <TextField fx:id="barraPesquisa" onKeyPressed="#pesquisaSemClique" prefHeight="26.0" prefWidth="343.0" />
                         <Button mnemonicParsing="false" onAction="#search" prefHeight="26.0" prefWidth="78.0" text="Pesquisar" />
                      </children>
                   </HBox>

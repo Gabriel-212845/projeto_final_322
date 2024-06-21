@@ -33,6 +33,9 @@ public class Compra {
     public void setDataDoPagamento(LocalDate dataDoPagamento){
         this.dataDoPagamento = dataDoPagamento;
     }
+    public void setDataDoPedido(LocalDate dataDoPedido) {
+        this.dataDoPedido = dataDoPedido;
+    }
     public void setDesconto(double desconto) {
         this.desconto = desconto;
     }

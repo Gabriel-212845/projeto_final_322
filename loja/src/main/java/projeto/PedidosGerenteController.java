@@ -192,12 +192,15 @@ public class PedidosGerenteController {
            && !path.getText().equals("") && !esp1.getText().equals("")&& !esp2.getText().equals("")
            && !esp3.getText().equals("") && !esp4.getText().equals("") && !esp5.getText().equals("")
            && !esp6.getText().equals("") && !quantidade.getText().equals("")){
+
+            String fullPath = "projeto_final_322\\loja\\src\\main\\java\\class01\\Imagens\\";
+
             try {
                 
                 if(tipoChoiseBox.getValue().equals("Tv")){
                     int quant = Integer.valueOf(quantidade.getText());
                     Tv tv = new Tv(Double.parseDouble(precoDeCusto.getText()), Double.parseDouble(precoDeVenda.getText()),
-                                   nome.getText(), marca.getText(), fornecedor.getText(), false, path.getText(),
+                                   nome.getText(), marca.getText(), fornecedor.getText(), false, fullPath + path.getText(),
                                    Double.parseDouble(esp1.getText()), esp2.getText(), esp3.getText(), StrToBoo(esp4.getText()),
                                    StrToBoo(esp5.getText()), Double.parseDouble(esp6.getText()));
                     listaDeProdutos.add(tv);
@@ -213,7 +216,7 @@ public class PedidosGerenteController {
                     int capacidadeBateria = Integer.valueOf(esp4.getText());
 
                     Tablet tablet = new Tablet(Double.parseDouble(precoDeCusto.getText()), Double.parseDouble(precoDeVenda.getText()),
-                                    nome.getText(), marca.getText(), fornecedor.getText(), false, path.getText(),
+                                    nome.getText(), marca.getText(), fornecedor.getText(), false, fullPath + path.getText(),
                                     Double.parseDouble(esp1.getText()), armazenamento, resolucaoCamera, capacidadeBateria,
                                     StrToBoo(esp5.getText()), StrToBoo(esp6.getText()));
                     listaDeProdutos.add(tablet);
@@ -230,7 +233,7 @@ public class PedidosGerenteController {
                     int capacidadeBateria = Integer.valueOf(esp5.getText());
 
                    Celular celular = new Celular(Double.parseDouble(precoDeCusto.getText()), Double.parseDouble(precoDeVenda.getText()),
-                    nome.getText(), marca.getText(), fornecedor.getText(), false, path.getText(),
+                    nome.getText(), marca.getText(), fornecedor.getText(), false, fullPath + path.getText(),
                     Double.parseDouble(esp1.getText()), qtdChips, armazenamento, resolucaoCamera, capacidadeBateria, esp6.getText());
                     listaDeProdutos.add(celular);
                     listaDeQuantidade.add(quant);

@@ -57,6 +57,11 @@ public class ComprarController {
     @FXML public Label nome;
 
     @SuppressWarnings("exports")
+    @FXML public Label descontoLabel;
+    @SuppressWarnings("exports")
+    @FXML public Label desconto;
+
+    @SuppressWarnings("exports")
     @FXML public TextField barraPesquisa;
 
     ArrayList<String> words = new ArrayList<>();
@@ -127,6 +132,16 @@ public class ComprarController {
     @SuppressWarnings("unchecked")
     @FXML
     public void initialize() {
+
+        if(cliente.getDescontoEspecial() <= 0){
+            desconto.setVisible(false);
+            descontoLabel.setVisible(false);
+        } else{
+            desconto.setText((cliente.getDescontoEspecial() * 100) + " %");
+        }
+
+
+
         nome.setText(cliente.getNome());
         saldo.setText(String.valueOf(cliente.getSaldo()));
 
@@ -207,9 +222,11 @@ public class ComprarController {
     }
 
     @FXML
-    void resetTableview() {
+    void pesquisaSemClique() {
         if(barraPesquisa.getText().equals("")){
             tableView.setItems(getProdutos());
+        } else{
+            tableView.setItems(getProdutosPesquisa(searchListProduct(barraPesquisa.getText(), words)));
         }
     }
 

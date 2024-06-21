@@ -55,9 +55,12 @@ public class Gerente extends Pessoas implements Gerir{
     }
 
     public void demitirCaixa(Caixa caixa){
-        if(caixasContratados.remove(caixa)){
-            double multa = 2 * caixa.getSalario();
-            gastarDoCofre(multa);
+        if(caixasContratados.size() > 1){
+            if(caixasContratados.remove(caixa)){
+                caixasContratados.get(0).adicionarClientes(caixa.getClientes());
+                double multa = 2 * caixa.getSalario();
+                gastarDoCofre(multa);
+            }
         }
     }
 

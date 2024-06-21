@@ -44,6 +44,9 @@ abstract public class Pessoas implements Comprar{
     public void setCarrinho(Compra carrinho) {
         this.carrinho = carrinho;
     }
+    public void setComprasAguardandoPostagem(List<Compra> comprasAguardandoPostagem) {
+        this.comprasAguardandoPostagem = comprasAguardandoPostagem;
+    }
     
 
     public void adicionarAoCarrinho(Produtos produto, int quant){
