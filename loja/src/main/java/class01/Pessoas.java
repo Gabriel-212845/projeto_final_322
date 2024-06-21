@@ -41,6 +41,9 @@ abstract public class Pessoas implements Comprar{
     public String getClasse() {
         return "Pessoas";
     }
+    public void setCarrinho(Compra carrinho) {
+        this.carrinho = carrinho;
+    }
     
 
     public void adicionarAoCarrinho(Produtos produto, int quant){
@@ -60,22 +63,42 @@ abstract public class Pessoas implements Comprar{
     public void removerDoCarrinho(Produtos produto, int quant){
         if(this.carrinho != null){
             for(int i = 1; i <= quant; i++){
-                if(this.carrinho.getProdutos().contains(produto)){
+                if(contem(this.carrinho.getProdutos(), produto)){
                     this.carrinho.removerDaCompra(produto);
                 }
             }
         }
     }
 
+    public void adicionarSaldo(double saldoAdd){
+        this.saldo += saldoAdd;
+    }
+
+
+
+
+    private boolean contem(List<Produtos> produtos, Produtos produto){
+        for(int i = 0; i < produtos.size(); i++){
+            if(produto.getNome().equals(produtos.get(i).getNome())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
 
     public boolean comprar(){
-        //verificação de pagamento
-        this.carrinho.setDataDoPagamento(LocalDate.now());
-        this.comprasAguardandoPostagem.add(this.carrinho);
-        this.carrinho = null;
+        if(this.saldo >= this.carrinho.getValorPago()){
+            this.saldo = this.saldo - this.carrinho.getValorPago();
+            this.carrinho.setDataDoPagamento(LocalDate.now());
+            this.comprasAguardandoPostagem.add(new Compra(this.carrinho));
+            this.carrinho = null;
 
-
-        return true;
+            return true;
+        }
+        return false;
 
     }
 

@@ -30,7 +30,7 @@ public class Estoque {
     public boolean removerDoEstoque(Produtos produto){
         for(int i = 0; i < this.produtosNoEstoque.size(); i++){
             if(produto.equals(this.produtosNoEstoque.get(i))){
-                if(this.quantDoProduto.get(i) == 0){
+                if(this.quantDoProduto.get(i) == 1){
                     this.quantDoProduto.remove(i);
                     this.produtosNoEstoque.remove(i);
                 } else{
@@ -56,7 +56,7 @@ public class Estoque {
     private Estoque (List<Produtos> produtosNoEstoque, List<Integer> quantDoProduto){
         this.produtosNoEstoque = produtosNoEstoque;
         this.quantDoProduto = quantDoProduto;
-    };
+    }
 
     public static Estoque getInstance(List<Produtos> produtosNoEstoque, List<Integer> quantDoProduto){
         if(instancia == null){

@@ -11,6 +11,7 @@ import class01.Pessoas;
 import class01.Produtos;
 import class01.Tablet;
 import class01.Tv;
+import class01.escrArquivo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,8 +31,8 @@ public class PedidosGerenteController {
     private Scene scene;
     private Parent root;
 
-    @SuppressWarnings("exports")
     public static Gerente gerente;
+    public static List<Gerente> Salvar;
 
     @SuppressWarnings({ "exports", "rawtypes" })
     @FXML public ChoiceBox tipoChoiseBox;
@@ -80,16 +81,13 @@ public class PedidosGerenteController {
     @SuppressWarnings("exports")
     @FXML public TextField quantidade;
 
-    @SuppressWarnings("exports")
     public List<Produtos> listaDeProdutos = new ArrayList<>();
     //@SuppressWarnings("exports")
     public List<Integer> listaDeQuantidade = new ArrayList<>();
 
     //@SuppressWarnings("exports")
     public ObservableList<String> listaTipoProdutos = FXCollections.observableArrayList("Tv", "Tablet", "Celular");
-    @SuppressWarnings("exports")
     public ObservableList<Pessoas> listaCaixasContrados = FXCollections.observableArrayList(gerente.getCaixasContratados());
-    @SuppressWarnings("exports")
     public ObservableList<Produtos> listaPedidoProdutos = FXCollections.observableArrayList(listaDeProdutos);
 
 
@@ -156,7 +154,7 @@ public class PedidosGerenteController {
 
     @SuppressWarnings("unchecked")
     @FXML
-    private void fazerPedido(ActionEvent event) throws IOException {
+    private void fazerPedido(ActionEvent event) throws Exception {
         if(caixasChoiseBox.getValue() != null && !listaDeProdutos.isEmpty() && !listaDeQuantidade.isEmpty()){
             int aux = -1;
             Caixa caixa = (Caixa) caixasChoiseBox.getValue();
@@ -181,6 +179,7 @@ public class PedidosGerenteController {
                 clearAll();
                 //System.out.println(gerente.getCaixasContratados().get(aux).ListarPedidosDeEstoque());
             }
+            escrArquivo.salvar(Salvar);
 
         }
     }
@@ -279,10 +278,11 @@ public class PedidosGerenteController {
 
     }
 
+    @SuppressWarnings("deprecation")
     public List<Integer> deepCopyInteger(List<Integer> listInteger){
         List<Integer> copy = new ArrayList<>();
         for(int i = 0; i<listInteger.size(); i++){
-            copy.add(listInteger.get(i));
+            copy.add(new Integer(listInteger.get(i)));
         }
         return copy;
     }
@@ -291,6 +291,7 @@ public class PedidosGerenteController {
 
     @FXML
     private void switchToGerenciamento(ActionEvent event) throws IOException {
+        GerenciamentoController.Salvar = Salvar;
         GerenciamentoController.gerente = gerente;
         root = FXMLLoader.load(getClass().getResource("Gerenciamento.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

@@ -6,5 +6,8 @@ module projeto {
     requires javafx.base;
 
     opens projeto to javafx.fxml;
+    opens class01 to javafx.fxml;
+
     exports projeto;
+    exports class01;
 }

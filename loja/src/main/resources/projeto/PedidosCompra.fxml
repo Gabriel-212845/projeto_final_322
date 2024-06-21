@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="454.0" prefWidth="922.0" spacing="20.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projeto.PedidosCompraController">
+   <children>
+      <Label contentDisplay="CENTER" text="Pedidos de Compra" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <AnchorPane prefHeight="239.0" prefWidth="560.0">
+         <children>
+            <VBox prefHeight="294.0" prefWidth="882.0">
+               <children>
+                  <HBox prefHeight="254.0" prefWidth="777.0">
+                     <children>
+                        <TableView fx:id="tableView" prefHeight="254.0" prefWidth="463.0">
+                          <columns>
+                            <TableColumn fx:id="dataColumn" prefWidth="210.39996910095215" text="Data do Pagamento" />
+                            <TableColumn fx:id="precoColumn" prefWidth="227.20001220703125" text="Valor Total" />
+                          </columns>
+                        </TableView>
+                        <AnchorPane prefHeight="254.0" prefWidth="473.0">
+                           <children>
+                              <Button layoutX="153.0" layoutY="114.0" mnemonicParsing="false" onAction="#DespacharTodosOsPedidos" text="Despachar todos os pedidos" />
+                              <Label fx:id="message" layoutX="209.0" layoutY="177.0" text="Efetuado!!" textFill="RED" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <Button mnemonicParsing="false" onAction="#switchToCaixa" text="Voltar" />
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

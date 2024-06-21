@@ -114,6 +114,7 @@ public class escrArquivo {
         System.out.println("XML file created successfully!");
     }
 
+    @SuppressWarnings("exports")
     public static void escrCaixa(Document doc, Element element, Caixa caixa){
         Element caixaElement = doc.createElement("Caixa");
         element.appendChild(caixaElement);
@@ -200,6 +201,7 @@ public class escrArquivo {
 
     }
 
+    @SuppressWarnings("exports")
     public static void escrClientes(Document doc, Element element, List<Pessoas> clientes){
         Element clientesElement = doc.createElement("clientes");
         element.appendChild(clientesElement);
@@ -218,6 +220,7 @@ public class escrArquivo {
         
     }
 
+    @SuppressWarnings("exports")
     public static void escrCliente(Document doc, Element element, Cliente cliente){
         Element clienteElement = doc.createElement("Cliente");
         element.appendChild(clienteElement);
@@ -265,6 +268,7 @@ public class escrArquivo {
     }
 
 
+    @SuppressWarnings("exports")
     public static void escrPedidoDeEstoque(Document doc, Element element, PedidoDeEstoque pedidoDeEstoque){
         Element pedidoDeEstoqueElement = doc.createElement("pedidoDeEstoque");
         element.appendChild(pedidoDeEstoqueElement);
@@ -300,6 +304,7 @@ public class escrArquivo {
     }
 
 
+    @SuppressWarnings("exports")
     public static void escrEstoque(Document doc, Element element, Estoque estoque){
         Element estoqueElement = doc.createElement("estoque");
         element.appendChild(estoqueElement);
@@ -324,6 +329,7 @@ public class escrArquivo {
 
 
 
+    @SuppressWarnings("exports")
     public static void escrPedidoDeAumento(Document doc, Element element, PedidoDeAumento pedidoDeAumento){
         Element pedidoDeAumentoElement = doc.createElement("pedidoDeAumento");
         element.appendChild(pedidoDeAumentoElement);
@@ -349,6 +355,7 @@ public class escrArquivo {
 
 
 
+    @SuppressWarnings("exports")
     public static void escrCompra(Document doc, Element element, Compra compra, String nomeCompra){
         Element compraElement = doc.createElement(nomeCompra);
         element.appendChild(compraElement);
@@ -393,6 +400,7 @@ public class escrArquivo {
 
 
 
+    @SuppressWarnings("exports")
     public static void escrProduto(Document doc, Element element, Produtos produto){
         Element produtoElement = doc.createElement("Produto");
         element.appendChild(produtoElement);

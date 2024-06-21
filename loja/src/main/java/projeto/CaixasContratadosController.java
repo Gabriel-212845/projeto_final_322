@@ -1,10 +1,12 @@
 package projeto;
 
 import java.io.IOException;
+import java.util.List;
 
 import class01.Caixa;
 import class01.Gerente;
 import class01.Pessoas;
+import class01.escrArquivo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +25,7 @@ public class CaixasContratadosController {
     private Scene scene;
     private Parent root;
 
-    @SuppressWarnings("exports")
+    public static List<Gerente> Salvar;
     public static Gerente gerente;
     @SuppressWarnings({ "exports", "rawtypes" })
     @FXML public ChoiceBox caixasChoiseBox;
@@ -35,7 +37,6 @@ public class CaixasContratadosController {
     @FXML public TextField salario;
 
 
-    @SuppressWarnings("exports")
     public ObservableList<Pessoas> listaCaixasContrados = FXCollections.observableArrayList(gerente.getCaixasContratados());
     
 
@@ -54,17 +55,23 @@ public class CaixasContratadosController {
             gerente.demitirCaixa((Caixa) caixasChoiseBox.getValue());
             listaCaixasContrados = FXCollections.observableArrayList(gerente.getCaixasContratados());
             caixasChoiseBox.setItems(listaCaixasContrados);
+            try {
+                escrArquivo.salvar(Salvar);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         }
     }
 
     @SuppressWarnings("unchecked")
     @FXML
-    private void contratarFuncionário(ActionEvent event) throws IOException {
+    private void contratarFuncionário(ActionEvent event) throws Exception {
         if(!nome.getText().equals("") && !id.getText().equals("") && !salario.getText().equals("")){
             try{
                 double sal = Double.parseDouble(salario.getText());
                 gerente.contratarCaixa(new Caixa(nome.getText(), id.getText(), 0, sal));
+                escrArquivo.salvar(Salvar);
 
                 listaCaixasContrados = FXCollections.observableArrayList(gerente.getCaixasContratados());
                 caixasChoiseBox.setItems(listaCaixasContrados);
@@ -79,6 +86,7 @@ public class CaixasContratadosController {
 
     @FXML
     private void switchToGerenciamento(ActionEvent event) throws IOException {
+        GerenciamentoController.Salvar = Salvar;
         GerenciamentoController.gerente = gerente;
         root = FXMLLoader.load(getClass().getResource("Gerenciamento.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

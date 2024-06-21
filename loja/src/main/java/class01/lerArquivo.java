@@ -82,6 +82,7 @@ public class lerArquivo {
 
 
 
+    @SuppressWarnings("exports")
     public static Produtos lerProduto(Element element){
         double precoCusto = Double.parseDouble(element.getElementsByTagName("precoCusto").item(0).getTextContent());
         double precoVenda = Double.parseDouble(element.getElementsByTagName("precoVenda").item(0).getTextContent());
@@ -132,6 +133,7 @@ public class lerArquivo {
 
 
 
+    @SuppressWarnings("exports")
     public static Compra lerCompra(Node node){
         Element element = (Element) node;
 
@@ -141,11 +143,15 @@ public class lerArquivo {
         if(element.getChildNodes().getLength() == 0){
             return null;
         }
+        NodeList aux = element.getElementsByTagName("Produtos");
+        if((((Element)aux.item(0)).getElementsByTagName("Produto")).getLength() == 0){
+            return null;
+        }
 
         NodeList listaProdutosCarrinhoNodes = element.getElementsByTagName("Produtos");
         NodeList listaquantidadesCarrinhoNodes =element.getElementsByTagName("quantidade");
 
-        for(int j = 0; j < listaProdutosCarrinhoNodes.getLength(); j++){
+        for(int j = 0; j < ((Element)listaProdutosCarrinhoNodes.item(0)).getElementsByTagName("Produto").getLength(); j++){
             NodeList produtosCarrinhoNodes = ((Element)listaProdutosCarrinhoNodes.item(0)).getElementsByTagName("Produto");
             Element produtosCarrinhoElement = (Element)produtosCarrinhoNodes.item(j);
             if(lerProduto(produtosCarrinhoElement) != null){
@@ -169,6 +175,7 @@ public class lerArquivo {
 
 
 
+    @SuppressWarnings("exports")
     public static PedidoDeAumento lerPedidoDeAumento(Node node){
 
         if(node.getChildNodes().getLength() != 0){
@@ -183,6 +190,7 @@ public class lerArquivo {
         } else return null;
     }
 
+    @SuppressWarnings("exports")
     public static Estoque lerEstoque(Node node){
         if(node.getChildNodes().getLength() == 0) return null;
 
@@ -204,6 +212,7 @@ public class lerArquivo {
         return Estoque.getInstance(produtosEstoque, quantidadeEstoque);
     }
 
+    @SuppressWarnings("exports")
     public static PedidoDeEstoque lerPedidoDeEstoque(Node node){
         if(node.getChildNodes().getLength() != 0){
 
@@ -240,6 +249,7 @@ public class lerArquivo {
     }
 
     //////////////////////////////////////////////////////////////////////
+    @SuppressWarnings("exports")
     public static List<Pessoas> lerListaClientes(Node node, List<Pessoas> pessoas){
         List<Pessoas> clientes = new ArrayList<>();
         Element element = (Element)node;
@@ -295,6 +305,7 @@ public class lerArquivo {
 
 
 
+    @SuppressWarnings("exports")
     public static Caixa criarCaixa(Node node, List<Pessoas> pessoas){
 
         //System.out.println(node.getNodeName());
@@ -371,6 +382,7 @@ public class lerArquivo {
     }
 
 
+    @SuppressWarnings("exports")
     public static Gerente criarGerente(Node node, List<Pessoas> pessoas){
 
         Element itemElement = (Element)node;

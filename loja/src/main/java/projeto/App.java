@@ -27,8 +27,7 @@ public class App extends Application {
     public void start(Stage primaryStage) {
 
         List<Gerente> gerentes = lerArquivo.ler();
-        Stage stage3 = new Stage();
-        SceneLoja(gerentes.get(0).getCaixasContratados().get(0), gerentes.get(0).getCaixasContratados().get(0).getClientes().get(0), stage3);
+        Stage stageSec = new Stage();
 
 
 
@@ -84,27 +83,29 @@ public class App extends Application {
                 return;
             }
 
-            Parent root1;
-
+            String id = email.substring(0, atIndex);
             String domain = email.substring(atIndex);
             switch (domain) {
                 case "@gestor.com":
-                    errorMessage.setText("Acesso permitido ao módulo: " + selectedModule);
-
-
-                    /////////////////////////
-                    Gerente gerente = new Gerente("Arnaldo", "123456", 550, 0.1);
-                    gerente.contratarCaixa(new Caixa("Jorge", "55555", 200, 950));
-                    gerente.contratarCaixa(new Caixa("Fábio", "57777", 200, 950));
-                    Stage stage2 = new Stage();
-                    SceneGerenciamento(gerente, stage2);
-                    /////////////////////////
-
-
-                    primaryStage.close();
+                    if (selectedModule.equals("Compras") && AcharPessoa(gerentes, id) != null) {
+                        SceneLoja(gerentes, AcharCaixaResp(gerentes, id), AcharPessoa(gerentes, id), stageSec);
+                        errorMessage.setText("Acesso permitido ao módulo: " + selectedModule);
+                        primaryStage.close();
+                    } else if(selectedModule.equals("Gerenciamento") && AcharPessoa(gerentes, id) != null){
+                        SceneGerenciamento(gerentes, (Gerente) AcharPessoa(gerentes, id), stageSec);
+                        errorMessage.setText("Acesso permitido ao módulo: " + selectedModule);
+                        primaryStage.close();
+                    } else {
+                        errorMessage.setText("Login inválido");
+                    }
                     break;
                 case "@funcionario.com":
-                    if (selectedModule.equals("Compras") || selectedModule.equals("Estoque")) {
+                    if (selectedModule.equals("Compras") && AcharPessoa(gerentes, id) != null) {
+                        SceneLoja(gerentes, AcharCaixaResp(gerentes, id), AcharPessoa(gerentes, id), stageSec);
+                        errorMessage.setText("Acesso permitido ao módulo: " + selectedModule);
+                        primaryStage.close();
+                    } else if(selectedModule.equals("Estoque") && AcharPessoa(gerentes, id) != null){
+                        SceneCaixa(gerentes, (Caixa) AcharPessoa(gerentes, id), stageSec);
                         errorMessage.setText("Acesso permitido ao módulo: " + selectedModule);
                         primaryStage.close();
                     } else {
@@ -112,21 +113,9 @@ public class App extends Application {
                     }
                     break;
                 case "@cliente.com":
-                    if (selectedModule.equals("Compras")) {
-                        errorMessage.setText("Acesso permitido ao módulo: Compras");
-
-                        /////////////////////////
-                        try {
-                            root1 = FXMLLoader.load(getClass().getResource("primary.fxml"));
-                            Scene scene1 = new Scene(root1);
-                            Stage stage1 = new Stage();
-	                        stage1.setScene(scene1);
-	                        stage1.show();
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-	                    /////////////////////////
-                        
+                    if (selectedModule.equals("Compras") && AcharPessoa(gerentes, id) != null) {
+                        SceneLoja(gerentes, AcharCaixaResp(gerentes, id), AcharPessoa(gerentes, id), stageSec);
+                        errorMessage.setText("Acesso permitido ao módulo: " + selectedModule);
                         primaryStage.close();
                     } else {
                         errorMessage.setText("Login inválido");
@@ -149,9 +138,10 @@ public class App extends Application {
     }
 
 
-    private void SceneGerenciamento(Gerente gerente, Stage stage){
+    private void SceneGerenciamento(List<Gerente> Salvar, Gerente gerente, Stage stage){
         Parent root;
         try {
+            GerenciamentoController.Salvar = Salvar;
             GerenciamentoController.gerente = gerente;
             root = FXMLLoader.load(getClass().getResource("Gerenciamento.fxml"));
             Scene scene = new Scene(root);
@@ -163,9 +153,25 @@ public class App extends Application {
 
     }
 
-    private void SceneLoja(Caixa caixa, Pessoas cliente, Stage stage){
+    private void SceneCaixa(List<Gerente> Salvar, Caixa caixa, Stage stage){
         Parent root;
         try {
+            CaixaController.Salvar = Salvar;
+            CaixaController.caixa = caixa;
+            root = FXMLLoader.load(getClass().getResource("Caixa.fxml"));
+            Scene scene = new Scene(root);
+	        stage.setScene(scene);
+	        stage.show();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+    }
+
+    private void SceneLoja(List<Gerente> Salvar, Caixa caixa, Pessoas cliente, Stage stage){
+        Parent root;
+        try {
+            ComprarController.Salvar = Salvar;
             ComprarController.caixa = caixa;
             ComprarController.cliente = cliente;
             root = FXMLLoader.load(getClass().getResource("Comprar.fxml"));
@@ -175,8 +181,48 @@ public class App extends Application {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-
     }
+
+    private Pessoas AcharPessoa(List<Gerente> gerentes, String id){
+        for(int i = 0; i< gerentes.size(); i++){
+            if(gerentes.get(i).getId().equals(id)){
+                return gerentes.get(i);
+            }
+            for(int j = 0; j < gerentes.get(i).getCaixasContratados().size(); j++){
+                if(gerentes.get(i).getCaixasContratados().get(j).getId().equals(id)){
+                    return gerentes.get(i).getCaixasContratados().get(j);
+                }
+
+                for(int k = 0; k < gerentes.get(i).getCaixasContratados().get(j).getClientes().size(); k++){
+                    if(gerentes.get(i).getCaixasContratados().get(j).getClientes().get(k).getId().equals(id)){
+                        return gerentes.get(i).getCaixasContratados().get(j).getClientes().get(k);
+                    }
+ 
+                }
+
+            }
+        }
+        return null;
+    }
+
+    private Caixa AcharCaixaResp(List<Gerente> gerentes, String id){
+        for(int i = 0; i< gerentes.size(); i++){
+            for(int j = 0; j < gerentes.get(i).getCaixasContratados().size(); j++){
+                for(int k = 0; k < gerentes.get(i).getCaixasContratados().get(j).getClientes().size(); k++){
+                    if(gerentes.get(i).getCaixasContratados().get(j).getClientes().get(k).getId().equals(id)){
+                        return gerentes.get(i).getCaixasContratados().get(j);
+                    }
+ 
+                }
+
+            }
+        }
+        return null;
+    }
+
+
+
+    
 
     public static void main(String[] args) {
         launch(args);

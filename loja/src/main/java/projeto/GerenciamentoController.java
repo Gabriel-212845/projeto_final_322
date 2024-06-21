@@ -1,6 +1,7 @@
 package projeto;
 
 import java.io.IOException;
+import java.util.List;
 
 import class01.Gerente;
 import javafx.event.ActionEvent;
@@ -18,8 +19,8 @@ public class GerenciamentoController {
     private Scene scene;
     private Parent root;
 
-    @SuppressWarnings("exports")
     public static Gerente gerente;
+    public static List<Gerente> Salvar;
     @SuppressWarnings("exports")
     @FXML public Label cofre;
     @SuppressWarnings("exports")
@@ -36,6 +37,7 @@ public class GerenciamentoController {
 
     @FXML
     private void switchToCaixasContratados(ActionEvent event) throws IOException {
+        CaixasContratadosController.Salvar = Salvar;
         CaixasContratadosController.gerente = gerente;
         root = FXMLLoader.load(getClass().getResource("CaixasContratados.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -46,6 +48,7 @@ public class GerenciamentoController {
 
     @FXML
     private void switchToPedidosGerente(ActionEvent event) throws IOException {
+        PedidosGerenteController.Salvar = Salvar;
         PedidosGerenteController.gerente = gerente;
         root = FXMLLoader.load(getClass().getResource("PedidosGerente.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
