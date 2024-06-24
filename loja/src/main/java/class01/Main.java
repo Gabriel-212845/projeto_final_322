@@ -176,6 +176,7 @@ public class Main {
         produtos1.add(celular1);
         quantidades1.add(2);
         PedidoDeEstoque pedidoEstoque1 = new PedidoDeEstoque(gerente, produtos1, quantidades1);
+        pedidoEstoque1.setData(LocalDate.parse("2024-06-21"));
         caixa1.adicionarPedidoDeEstoque(pedidoEstoque1);
 
         Celular celular2 = new Celular(200, 500, "Celular2", "Red", "Industrias Tw", false, "projeto_final_322\\loja\\src\\main\\java\\class01\\Imagens\\celular2.png",

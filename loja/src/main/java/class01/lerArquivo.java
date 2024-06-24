@@ -289,7 +289,16 @@ public class lerArquivo {
                 //clienteElement.getElementsByTagName("id").item(0).getTextContent();
                 for(int j = 0; j< pessoas.size(); j++){
                     if(pessoas.get(j).getId().equals(clienteElement.getTextContent())){
-                        clientes.add(pessoas.get(j));
+                        int a = 0;
+                        for(int k=0; k< clientes.size(); k++){
+                            if(clientes.get(k).getId().equals(pessoas.get(j).getId())){
+                                a+=1;
+                            }
+                        }
+                        if(a<=0){
+                            clientes.add(pessoas.get(j));
+                            a = 0;
+                        }
                     }
                 }
             }
