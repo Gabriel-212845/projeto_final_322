@@ -100,4 +100,9 @@ public class Tablet extends Produtos {
         System.out.println("Resolução da Câmera: " + resolucaoCamera + "MP, Capacidade da Bateria: " + capacidadeBateria + "mAh");
         System.out.println("Caneta: " + (caneta ? "Sim" : "Não") + ", Teclado: " + (teclado ? "Sim" : "Não"));
     }
+
+    @Override
+    public Tablet clone() throws CloneNotSupportedException {
+        return (Tablet) super.clone();
+    }
 }

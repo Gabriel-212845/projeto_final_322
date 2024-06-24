@@ -91,10 +91,10 @@ public abstract class Produtos {
         return copy;
     }
 
-
-
-
-
+    @Override
+    public Produtos clone() throws CloneNotSupportedException {
+        return (Produtos) super.clone();
+    }
 
     public abstract void mostrarDetalhes();
 }

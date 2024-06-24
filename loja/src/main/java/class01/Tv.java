@@ -98,4 +98,10 @@ public class Tv extends Produtos {
         System.out.println("Tipo de Tela: " + tipoTela + ", Smart: " + (smart ? "Sim" : "Não"));
         System.out.println("Suporte: " + (suport ? "Acompanha Suporte" : "Não Acompanha Suporte") + ", Consumo de Energia: " + consumoEnergia + " kWh");
     }
+
+    @Override
+    public Tv clone() throws CloneNotSupportedException {
+        return (Tv) super.clone();
+    }
+
 }

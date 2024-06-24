@@ -98,4 +98,9 @@ public class Celular extends Produtos {
         System.out.println("Armazenamento: " + armazenamento + "GB, Resolução da Câmera: " + resolucaoCamera + "MP");
         System.out.println("Capacidade da Bateria: " + capacidadeBateria + "mAh, Resistências: " + resistencias);
     }
+
+    @Override
+    public Celular clone() throws CloneNotSupportedException {
+        return (Celular) super.clone();
+    }
 }
