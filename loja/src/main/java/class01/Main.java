@@ -243,8 +243,9 @@ public class Main {
         caixa2.adicionarCliente(caixa2);
         caixa2.adicionarCliente(gerente);
 
+        celular2.adicionarObservador(cliente1);
+        celular2.adicionarObservador(cliente2);
 
-        
 
         escrArquivo.salvar(gerentes);
 

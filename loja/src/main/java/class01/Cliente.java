@@ -39,6 +39,9 @@ public class Cliente extends Pessoas{
 
     }
 
+    public void atualizar(Produtos produto) {
+        System.out.println("Cliente " + this.getNome() + " foi notificado sobre a mudança no produto: " + produto.getNome());
+    }
 
 
 }

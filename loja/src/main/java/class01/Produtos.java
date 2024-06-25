@@ -11,6 +11,7 @@ public abstract class Produtos {
     protected String fornecedor;
     protected boolean promocao;
     protected String path;
+    protected List<Cliente> observadores;
 
     public Produtos(double precoCusto, double precoVenda, String nome, String marca, String fornecedor, boolean promocao, String path) {
         this.precoCusto = precoCusto;
@@ -20,6 +21,7 @@ public abstract class Produtos {
         this.fornecedor = fornecedor;
         this.promocao = promocao;
         this.path = path;
+        this.observadores = new ArrayList<>();
     }
 
     public double getPrecoCusto() {
@@ -75,6 +77,20 @@ public abstract class Produtos {
 
     public String getClasse(){
         return "Produtos";
+    }
+
+    public void adicionarObservador(Cliente cliente) {
+        observadores.add(cliente);
+    }
+
+    public void removerObservador(Cliente cliente) {
+        observadores.remove(cliente);
+    }
+
+    public void notificarObservadores() {
+        for (Cliente cliente : observadores) {
+            cliente.atualizar(this);
+        }
     }
 
     public static List<Produtos> DeepCopyList(List<Produtos> listaProdutos){
